@@ -5,80 +5,830 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>VIKDEM — магазин часов</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 <style>
-:root{--bg:#0b0b0d;--card:#151518;--text:#f5f5f2;--muted:#96969d;--gold:#d7b56d;--line:#29292d}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-.app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:86px}
-header{padding:24px 18px 12px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:25px;letter-spacing:5px;font-weight:800}.sub{font-size:10px;letter-spacing:2px;color:var(--gold);margin-top:4px}
-.icon{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:#111113;color:#fff;font-size:19px}
-.hero{margin:8px 16px 20px;padding:25px 20px;border:1px solid #302b20;border-radius:22px;background:radial-gradient(circle at 90% 10%,#3a2d15 0,#171412 35%,#111113 75%);overflow:hidden}
-.hero small{color:var(--gold);letter-spacing:2px}.hero h1{font-family:Georgia,serif;font-size:31px;line-height:1.05;margin:10px 0}.hero p{color:#b5b5b8;margin:0 0 18px;font-size:14px}
-.btn{border:0;border-radius:12px;background:var(--gold);color:#111;padding:12px 17px;font-weight:800}
-.section{padding:0 16px}.row{display:flex;justify-content:space-between;align-items:center}.title{font-size:20px;font-weight:750}.link{color:var(--gold);font-size:13px}
-.categories{display:flex;gap:9px;overflow:auto;padding:13px 0 20px}.cat{white-space:nowrap;padding:10px 15px;border:1px solid var(--line);border-radius:20px;color:#ccc;background:#111113}.cat.active{background:#e1c17b;color:#111;border-color:#e1c17b}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.product{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;position:relative}.watch{height:190px;background:linear-gradient(145deg,#242428,#0e0e10);display:flex;align-items:center;justify-content:center;font-size:64px}.badge{position:absolute;top:10px;left:10px;background:#d7b56d;color:#111;font-size:10px;font-weight:800;padding:5px 8px;border-radius:8px}.info{padding:12px}.model{font-weight:700}.spec{font-size:11px;color:var(--muted);margin:5px 0 10px}.price{font-weight:800;font-size:17px}.buy{margin-top:10px;width:100%;padding:10px;border-radius:10px;border:1px solid #3a3427;background:#1b1916;color:var(--gold);font-weight:700}
-.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);height:72px;background:rgba(15,15,17,.96);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);z-index:5}.nav{border:0;background:none;color:#777;font-size:11px}.nav span{display:block;font-size:20px;margin-bottom:3px}.nav.active{color:var(--gold)}
-.toast{position:fixed;left:16px;right:16px;bottom:84px;background:#f1f1ed;color:#111;padding:13px 15px;border-radius:13px;font-weight:700;display:none;z-index:10}
+:root{
+  --bg:#0b0b0d;
+  --card:#151518;
+  --text:#f5f5f2;
+  --muted:#96969d;
+  --gold:#d7b56d;
+  --line:#29292d;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+button{
+  font-family:inherit;
+  cursor:pointer;
+}
+
+.app{
+  max-width:520px;
+  margin:auto;
+  min-height:100vh;
+  padding-bottom:86px;
+}
+
+header{
+  padding:24px 18px 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:25px;
+  letter-spacing:5px;
+  font-weight:800;
+}
+
+.sub{
+  font-size:10px;
+  letter-spacing:2px;
+  color:var(--gold);
+  margin-top:4px;
+}
+
+.icon{
+  width:42px;
+  height:42px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:#111113;
+  color:#fff;
+  font-size:19px;
+}
+
+.hero{
+  margin:8px 16px 20px;
+  padding:25px 20px;
+  border:1px solid #302b20;
+  border-radius:22px;
+  background:radial-gradient(circle at 90% 10%,#3a2d15 0,#171412 35%,#111113 75%);
+  overflow:hidden;
+}
+
+.hero small{
+  color:var(--gold);
+  letter-spacing:2px;
+}
+
+.hero h1{
+  font-family:Georgia,serif;
+  font-size:31px;
+  line-height:1.05;
+  margin:10px 0;
+}
+
+.hero p{
+  color:#b5b5b8;
+  margin:0 0 18px;
+  font-size:14px;
+}
+
+.btn{
+  border:0;
+  border-radius:12px;
+  background:var(--gold);
+  color:#111;
+  padding:12px 17px;
+  font-weight:800;
+}
+
+.section{
+  padding:0 16px;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.title{
+  font-size:20px;
+  font-weight:750;
+}
+
+.link{
+  color:var(--gold);
+  font-size:13px;
+}
+
+.categories{
+  display:flex;
+  gap:9px;
+  overflow:auto;
+  padding:13px 0 20px;
+}
+
+.cat{
+  white-space:nowrap;
+  padding:10px 15px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  color:#ccc;
+  background:#111113;
+}
+
+.cat.active{
+  background:#e1c17b;
+  color:#111;
+  border-color:#e1c17b;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.product{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+}
+
+.watch{
+  height:190px;
+  background:linear-gradient(145deg,#242428,#0e0e10);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:64px;
+}
+
+.badge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#d7b56d;
+  color:#111;
+  font-size:10px;
+  font-weight:800;
+  padding:5px 8px;
+  border-radius:8px;
+}
+
+.info{
+  padding:12px;
+}
+
+.model{
+  font-weight:700;
+}
+
+.spec{
+  font-size:11px;
+  color:var(--muted);
+  margin:5px 0 10px;
+}
+
+.price{
+  font-weight:800;
+  font-size:17px;
+}
+
+.buy{
+  margin-top:10px;
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #3a3427;
+  background:#1b1916;
+  color:var(--gold);
+  font-weight:700;
+}
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(520px,100%);
+  height:72px;
+  background:rgba(15,15,17,.96);
+  border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  z-index:5;
+}
+
+.nav{
+  border:0;
+  background:none;
+  color:#777;
+  font-size:11px;
+}
+
+.nav span{
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
+}
+
+.nav.active{
+  color:var(--gold);
+}
+
+.toast{
+  position:fixed;
+  left:16px;
+  right:16px;
+  bottom:84px;
+  background:#f1f1ed;
+  color:#111;
+  padding:13px 15px;
+  border-radius:13px;
+  font-weight:700;
+  display:none;
+  z-index:20;
+}
+
+.cart-panel{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  z-index:30;
+  display:none;
+  align-items:flex-end;
+}
+
+.cart{
+  width:100%;
+  max-width:520px;
+  margin:auto;
+  background:#111113;
+  border-radius:24px 24px 0 0;
+  border:1px solid var(--line);
+  max-height:85vh;
+  overflow:auto;
+  padding:20px 16px 30px;
+}
+
+.cart-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.cart-title{
+  font-size:22px;
+  font-weight:800;
+}
+
+.close{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:#19191c;
+  color:#fff;
+  font-size:18px;
+}
+
+.cart-item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.cart-name{
+  font-weight:700;
+}
+
+.cart-price{
+  color:var(--gold);
+  margin-top:5px;
+  font-size:13px;
+}
+
+.qty{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.qty button{
+  width:30px;
+  height:30px;
+  border-radius:8px;
+  border:1px solid var(--line);
+  background:#19191c;
+  color:#fff;
+  font-size:18px;
+}
+
+.qty span{
+  min-width:18px;
+  text-align:center;
+}
+
+.cart-empty{
+  text-align:center;
+  color:var(--muted);
+  padding:35px 10px;
+}
+
+.cart-total{
+  display:flex;
+  justify-content:space-between;
+  margin:22px 0;
+  font-size:19px;
+  font-weight:800;
+}
+
+.cart-actions{
+  display:grid;
+  gap:10px;
+}
+
+.checkout{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:var(--gold);
+  color:#111;
+  font-weight:800;
+  font-size:15px;
+}
+
+.clear{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#18181b;
+  color:#aaa;
+}
+
+@media(max-width:380px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <div class="app">
+
 <header>
-  <div><div class="logo">VIKDEM</div><div class="sub">TIME · LEGACY · OURS</div></div>
-  <button class="icon" onclick="showToast('Профиль откроем на следующем этапе')">⌾</button>
+  <div>
+    <div class="logo">VIKDEM</div>
+    <div class="sub">TIME · LEGACY · OURS</div>
+  </div>
+
+  <button class="icon" onclick="showToast('Профиль подключим следующим этапом')">
+    ⌾
+  </button>
 </header>
 
 <section class="hero">
   <small>VIKDEM WATCHES</small>
-  <h1>Выглядят дороже,<br>чем стоят.</h1>
-  <p>Стильные часы на каждый день. Новые модели уже в каталоге.</p>
-  <button class="btn" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Смотреть каталог</button>
+
+  <h1>
+    Выглядят дороже,<br>
+    чем стоят.
+  </h1>
+
+  <p>
+    Стильные часы на каждый день.
+    Новые модели уже в каталоге.
+  </p>
+
+  <button class="btn" onclick="scrollCatalog()">
+    Смотреть каталог
+  </button>
 </section>
 
 <section class="section" id="catalog">
-  <div class="row"><div class="title">Каталог</div><div class="link">Все модели →</div></div>
+
+  <div class="row">
+    <div class="title">Каталог</div>
+    <div class="link">VIKDEM</div>
+  </div>
+
   <div class="categories">
-    <button class="cat active" onclick="filterCat(this,'all')">Все</button>
-    <button class="cat" onclick="filterCat(this,'men')">Мужские</button>
-    <button class="cat" onclick="filterCat(this,'women')">Женские</button>
-    <button class="cat" onclick="filterCat(this,'new')">Новинки</button>
+    <button class="cat active" onclick="filterCat(this,'all')">
+      Все
+    </button>
+
+    <button class="cat" onclick="filterCat(this,'men')">
+      Мужские
+    </button>
+
+    <button class="cat" onclick="filterCat(this,'women')">
+      Женские
+    </button>
+
+    <button class="cat" onclick="filterCat(this,'new')">
+      Новинки
+    </button>
   </div>
 
   <div class="grid" id="products">
+
     <article class="product" data-cat="men new">
-      <div class="badge">НОВИНКА</div><div class="watch">⌚</div>
-      <div class="info"><div class="model">POEDAGAR 970</div><div class="spec">Quartz · 41 мм · 3 BAR</div><div class="price">2 500 ₽</div><button class="buy" onclick="add('POEDAGAR 970')">В корзину</button></div>
+      <div class="badge">ТОВАР</div>
+
+      <div class="watch">
+        ⌚
+      </div>
+
+      <div class="info">
+        <div class="model">Модель №1</div>
+        <div class="spec">Мужские · характеристики позже</div>
+        <div class="price">2 500 ₽</div>
+
+        <button class="buy" onclick="add('Модель №1',2500)">
+          В корзину
+        </button>
+      </div>
     </article>
+
+
     <article class="product" data-cat="men">
-      <div class="watch">⌚</div>
-      <div class="info"><div class="model">POEDAGAR 960</div><div class="spec">Quartz · 42 мм · Hardlex</div><div class="price">2 500 ₽</div><button class="buy" onclick="add('POEDAGAR 960')">В корзину</button></div>
+
+      <div class="watch">
+        ⌚
+      </div>
+
+      <div class="info">
+        <div class="model">Модель №2</div>
+        <div class="spec">Мужские · характеристики позже</div>
+        <div class="price">2 500 ₽</div>
+
+        <button class="buy" onclick="add('Модель №2',2500)">
+          В корзину
+        </button>
+      </div>
     </article>
-    <article class="product" data-cat="men new">
-      <div class="badge">НОВИНКА</div><div class="watch">⌚</div>
-      <div class="info"><div class="model">POEDAGAR 936</div><div class="spec">Quartz · 43 мм · Calendar</div><div class="price">2 500 ₽</div><button class="buy" onclick="add('POEDAGAR 936')">В корзину</button></div>
-    </article>
+
+
     <article class="product" data-cat="women">
-      <div class="watch">⌚</div>
-      <div class="info"><div class="model">POEDAGAR Lady</div><div class="spec">Quartz · 28 мм · 3 BAR</div><div class="price">2 500 ₽</div><button class="buy" onclick="add('POEDAGAR Lady')">В корзину</button></div>
+
+      <div class="watch">
+        ⌚
+      </div>
+
+      <div class="info">
+        <div class="model">Модель №3</div>
+        <div class="spec">Женские · характеристики позже</div>
+        <div class="price">2 500 ₽</div>
+
+        <button class="buy" onclick="add('Модель №3',2500)">
+          В корзину
+        </button>
+      </div>
     </article>
+
+
+    <article class="product" data-cat="men">
+
+      <div class="watch">
+        ⌚
+      </div>
+
+      <div class="info">
+        <div class="model">Модель №4</div>
+        <div class="spec">Мужские · характеристики позже</div>
+        <div class="price">2 500 ₽</div>
+
+        <button class="buy" onclick="add('Модель №4',2500)">
+          В корзину
+        </button>
+      </div>
+    </article>
+
   </div>
 </section>
 
+
 <div class="toast" id="toast"></div>
-<nav class="bottom">
- <button class="nav active"><span>⌂</span>Главная</button>
- <button class="nav" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})"><span>⌚</span>Каталог</button>
- <button class="nav" onclick="showToast('Корзина пока демонстрационная')"><span>🛒</span>Корзина</button>
- <button class="nav" onclick="showToast('Профиль подключим следующим этапом')"><span>◉</span>Профиль</button>
-</nav>
+
+
+<div class="cart-panel" id="cartPanel" onclick="closeCart(event)">
+
+  <div class="cart" onclick="event.stopPropagation()">
+
+    <div class="cart-head">
+      <div class="cart-title">
+        Корзина
+      </div>
+
+      <button class="close" onclick="closeCart()">
+        ✕
+      </button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      <span>Итого:</span>
+      <span id="cartTotal">0 ₽</span>
+    </div>
+
+    <div class="cart-actions">
+
+      <button class="checkout" onclick="checkout()">
+        Оформить заказ
+      </button>
+
+      <button class="clear" onclick="clearCart()">
+        Очистить корзину
+      </button>
+
+    </div>
+
+  </div>
+
 </div>
+
+
+<nav class="bottom">
+
+  <button class="nav active" onclick="scrollTopPage()">
+    <span>⌂</span>
+    Главная
+  </button>
+
+  <button class="nav" onclick="scrollCatalog()">
+    <span>⌚</span>
+    Каталог
+  </button>
+
+  <button class="nav" onclick="openCart()">
+    <span>🛒</span>
+    Корзина
+  </button>
+
+  <button class="nav" onclick="showToast('Профиль подключим следующим этапом')">
+    <span>◉</span>
+    Профиль
+  </button>
+
+</nav>
+
+</div>
+
+
 <script>
-const tg=window.Telegram?.WebApp;
-if(tg){tg.ready();tg.expand();}
-function showToast(t){const x=document.getElementById('toast');x.textContent=t;x.style.display='block';clearTimeout(window.tt);window.tt=setTimeout(()=>x.style.display='none',2200)}
-function add(name){showToast(name+' добавлены в корзину 🛒')}
-function filterCat(btn,cat){document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.product').forEach(p=>{p.style.display=cat==='all'||p.dataset.cat.includes(cat)?'block':'none'})}
+
+const tg = window.Telegram?.WebApp;
+
+if(tg){
+  tg.ready();
+  tg.expand();
+}
+
+
+let cart = JSON.parse(localStorage.getItem('vikdem_cart') || '[]');
+
+
+function saveCart(){
+  localStorage.setItem(
+    'vikdem_cart',
+    JSON.stringify(cart)
+  );
+}
+
+
+function money(value){
+  return new Intl.NumberFormat('ru-RU').format(value) + ' ₽';
+}
+
+
+function showToast(text){
+
+  const x = document.getElementById('toast');
+
+  x.textContent = text;
+
+  x.style.display = 'block';
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(()=>{
+    x.style.display = 'none';
+  },2200);
+}
+
+
+function add(name,price){
+
+  const existing = cart.find(
+    item => item.name === name
+  );
+
+  if(existing){
+    existing.qty++;
+  }else{
+    cart.push({
+      name:name,
+      price:price,
+      qty:1
+    });
+  }
+
+  saveCart();
+  updateCart();
+
+  showToast(
+    name + ' добавлены в корзину 🛒'
+  );
+}
+
+
+function updateCart(){
+
+  const box = document.getElementById('cartItems');
+  const totalBox = document.getElementById('cartTotal');
+
+  if(cart.length === 0){
+
+    box.innerHTML =
+      '<div class="cart-empty">Корзина пока пуста 🛒</div>';
+
+    totalBox.textContent = '0 ₽';
+
+    return;
+  }
+
+
+  box.innerHTML = cart.map((item,index)=>`
+
+    <div class="cart-item">
+
+      <div>
+        <div class="cart-name">
+          ${item.name}
+        </div>
+
+        <div class="cart-price">
+          ${money(item.price)} × ${item.qty}
+        </div>
+      </div>
+
+      <div class="qty">
+
+        <button onclick="changeQty(${index},-1)">
+          −
+        </button>
+
+        <span>
+          ${item.qty}
+        </span>
+
+        <button onclick="changeQty(${index},1)">
+          +
+        </button>
+
+      </div>
+
+    </div>
+
+  `).join('');
+
+
+  const total = cart.reduce(
+    (sum,item)=>
+      sum + item.price * item.qty,
+    0
+  );
+
+  totalBox.textContent = money(total);
+}
+
+
+function changeQty(index,value){
+
+  cart[index].qty += value;
+
+  if(cart[index].qty <= 0){
+    cart.splice(index,1);
+  }
+
+  saveCart();
+  updateCart();
+}
+
+
+function clearCart(){
+
+  if(cart.length === 0){
+    showToast('Корзина уже пуста');
+    return;
+  }
+
+  cart = [];
+
+  saveCart();
+  updateCart();
+
+  showToast('Корзина очищена');
+}
+
+
+function openCart(){
+
+  updateCart();
+
+  document.getElementById(
+    'cartPanel'
+  ).style.display = 'flex';
+}
+
+
+function closeCart(event){
+
+  if(
+    !event ||
+    event.target.id === 'cartPanel'
+  ){
+    document.getElementById(
+      'cartPanel'
+    ).style.display = 'none';
+  }
+}
+
+
+function checkout(){
+
+  if(cart.length === 0){
+    showToast('Добавьте товар в корзину');
+    return;
+  }
+
+  showToast(
+    'Оформление заказа подключим следующим этапом'
+  );
+}
+
+
+function filterCat(btn,cat){
+
+  document
+    .querySelectorAll('.cat')
+    .forEach(x =>
+      x.classList.remove('active')
+    );
+
+  btn.classList.add('active');
+
+  document
+    .querySelectorAll('.product')
+    .forEach(p=>{
+
+      p.style.display =
+        cat === 'all' ||
+        p.dataset.cat.includes(cat)
+          ? 'block'
+          : 'none';
+
+    });
+}
+
+
+function scrollCatalog(){
+
+  document
+    .getElementById('catalog')
+    .scrollIntoView({
+      behavior:'smooth'
+    });
+
+}
+
+
+function scrollTopPage(){
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
+}
+
+
+updateCart();
+
 </script>
+
 </body>
 </html>
