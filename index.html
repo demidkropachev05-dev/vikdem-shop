@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>VIKDEM — магазин часов</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{--bg:#0b0b0d;--card:#151518;--text:#f5f5f2;--muted:#96969d;--gold:#d7b56d;--line:#29292d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:86px}
+header{padding:24px 18px 12px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:25px;letter-spacing:5px;font-weight:800}.sub{font-size:10px;letter-spacing:2px;color:var(--gold);margin-top:4px}
+.icon{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:#111113;color:#fff;font-size:19px}
+.hero{margin:8px 16px 20px;padding:25px 20px;border:1px solid #302b20;border-radius:22px;background:radial-gradient(circle at 90% 10%,#3a2d15 0,#171412 35%,#111113 75%);overflow:hidden}
+.hero small{color:var(--gold);letter-spacing:2px}.hero h1{font-family:Georgia,serif;font-size:31px;line-height:1.05;margin:10px 0}.hero p{color:#b5b5b8;margin:0 0 18px;font-size:14px}
+.btn{border:0;border-radius:12px;background:var(--gold);color:#111;padding:12px 17px;font-weight:800}
+.section{padding:0 16px}.row{display:flex;justify-content:space-between;align-items:center}.title{font-size:20px;font-weight:750}.link{color:var(--gold);font-size:13px}
+.categories{display:flex;gap:9px;overflow:auto;padding:13px 0 20px}.cat{white-space:nowrap;padding:10px 15px;border:1px solid var(--line);border-radius:20px;color:#ccc;background:#111113}.cat.active{background:#e1c17b;color:#111;border-color:#e1c17b}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.product{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;position:relative}.watch{height:190px;background:linear-gradient(145deg,#242428,#0e0e10);display:flex;align-items:center;justify-content:center;font-size:64px}.badge{position:absolute;top:10px;left:10px;background:#d7b56d;color:#111;font-size:10px;font-weight:800;padding:5px 8px;border-radius:8px}.info{padding:12px}.model{font-weight:700}.spec{font-size:11px;color:var(--muted);margin:5px 0 10px}.price{font-weight:800;font-size:17px}.buy{margin-top:10px;width:100%;padding:10px;border-radius:10px;border:1px solid #3a3427;background:#1b1916;color:var(--gold);font-weight:700}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);height:72px;background:rgba(15,15,17,.96);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);z-index:5}.nav{border:0;background:none;color:#777;font-size:11px}.nav span{display:block;font-size:20px;margin-bottom:3px}.nav.active{color:var(--gold)}
+.toast{position:fixed;left:16px;right:16px;bottom:84px;background:#f1f1ed;color:#111;padding:13px 15px;border-radius:13px;font-weight:700;display:none;z-index:10}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div><div class="logo">VIKDEM</div><div class="sub">TIME · LEGACY · OURS</div></div>
+  <button class="icon" onclick="showToast('Профиль откроем на следующем этапе')">⌾</button>
+</header>
+
+<section class="hero">
+  <small>VIKDEM WATCHES</small>
+  <h1>Выглядят дороже,<br>чем стоят.</h1>
+  <p>Стильные часы на каждый день. Новые модели уже в каталоге.</p>
+  <button class="btn" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Смотреть каталог</button>
+</section>
+
+<section class="section" id="catalog">
+  <div class="row"><div class="title">Каталог</div><div class="link">Все модели →</div></div>
+  <div class="categories">
+    <button class="cat active" onclick="filterCat(this,'all')">Все</button>
+    <button class="cat" onclick="filterCat(this,'men')">Мужские</button>
+    <button class="cat" onclick="filterCat(this,'women')">Женские</button>
+    <button class="cat" onclick="filterCat(this,'new')">Новинки</button>
+  </div>
+
+  <div class="grid" id="products">
+    <article class="product" data-cat="men new">
+      <div class="badge">НОВИНКА</div><div class="watch">⌚</div>
+      <div class="info"><div class="model">POEDAGAR 970</div><div class="spec">Quartz · 41 мм · 3 BAR</div><div class="price">2 500 ₽</div><button class="buy" onclick="add('POEDAGAR 970')">В корзину</button></div>
+    </article>
+    <article class="product" data-cat="men">
+      <div class="watch">⌚</div>
+      <div class="info"><div class="model">POEDAGAR 960</div><div class="spec">Quartz · 42 мм · Hardlex</div><div class="price">2 500 ₽</div><button class="buy" onclick="add('POEDAGAR 960')">В корзину</button></div>
+    </article>
+    <article class="product" data-cat="men new">
+      <div class="badge">НОВИНКА</div><div class="watch">⌚</div>
+      <div class="info"><div class="model">POEDAGAR 936</div><div class="spec">Quartz · 43 мм · Calendar</div><div class="price">2 500 ₽</div><button class="buy" onclick="add('POEDAGAR 936')">В корзину</button></div>
+    </article>
+    <article class="product" data-cat="women">
+      <div class="watch">⌚</div>
+      <div class="info"><div class="model">POEDAGAR Lady</div><div class="spec">Quartz · 28 мм · 3 BAR</div><div class="price">2 500 ₽</div><button class="buy" onclick="add('POEDAGAR Lady')">В корзину</button></div>
+    </article>
+  </div>
+</section>
+
+<div class="toast" id="toast"></div>
+<nav class="bottom">
+ <button class="nav active"><span>⌂</span>Главная</button>
+ <button class="nav" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})"><span>⌚</span>Каталог</button>
+ <button class="nav" onclick="showToast('Корзина пока демонстрационная')"><span>🛒</span>Корзина</button>
+ <button class="nav" onclick="showToast('Профиль подключим следующим этапом')"><span>◉</span>Профиль</button>
+</nav>
+</div>
+<script>
+const tg=window.Telegram?.WebApp;
+if(tg){tg.ready();tg.expand();}
+function showToast(t){const x=document.getElementById('toast');x.textContent=t;x.style.display='block';clearTimeout(window.tt);window.tt=setTimeout(()=>x.style.display='none',2200)}
+function add(name){showToast(name+' добавлены в корзину 🛒')}
+function filterCat(btn,cat){document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.product').forEach(p=>{p.style.display=cat==='all'||p.dataset.cat.includes(cat)?'block':'none'})}
+</script>
+</body>
+</html>
