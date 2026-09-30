@@ -2322,7 +2322,152 @@ search.addEventListener(
     "input",
     filterProducts
 );
+    
+const productOverlay =
+    document.getElementById("productOverlay");
 
+const productModalTitle =
+    document.getElementById("productModalTitle");
+
+const productModalDescription =
+    document.getElementById("productModalDescription");
+
+const productModalPrice =
+    document.getElementById("productModalPrice");
+
+const productModalAdd =
+    document.getElementById("productModalAdd");
+
+const closeProduct =
+    document.getElementById("closeProduct");
+
+let selectedProduct = null;
+
+document
+    .querySelectorAll(".product")
+    .forEach(card => {
+
+        card.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target.closest(".add-button")
+                ) {
+                    return;
+                }
+
+                const id =
+                    Number(
+                        this
+                            .querySelector(".add-button")
+                            .dataset.id
+                    );
+
+                const product =
+                    products.find(
+                        item =>
+                            item.id === id
+                    );
+
+                if (!product) return;
+
+                selectedProduct = product;
+
+                productModalTitle.textContent =
+                    product.name;
+
+                productModalDescription.textContent =
+                    "⌚ Стильные часы POEDAGAR. Подробная информация о модели появится после добавления фотографий и характеристик.";
+
+                productModalPrice.textContent =
+                    product.price.toLocaleString("ru-RU") +
+                    " ₽";
+
+                productOverlay.classList.add(
+                    "active"
+                );
+
+            }
+        );
+
+    });
+
+closeProduct.addEventListener(
+    "click",
+    function() {
+
+        productOverlay.classList.remove(
+            "active"
+        );
+
+    }
+);
+
+productOverlay.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target === productOverlay
+        ) {
+
+            productOverlay.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+productModalAdd.addEventListener(
+    "click",
+    function() {
+
+        if (!selectedProduct) return;
+
+        const existing =
+            cart.find(
+                item =>
+                    item.id === selectedProduct.id
+            );
+
+        if (existing) {
+
+            existing.quantity++;
+
+        } else {
+
+            cart.push({
+
+                id: selectedProduct.id,
+
+                name: selectedProduct.name,
+
+                price: selectedProduct.price,
+
+                quantity: 1
+
+            });
+
+        }
+
+        updateCartCount();
+
+        productModalAdd.textContent =
+            "ДОБАВЛЕНО ✓";
+
+        setTimeout(() => {
+
+            productModalAdd.textContent =
+                "В КОРЗИНУ";
+
+        }, 800);
+
+    }
+);
+    
 </script>
 
 </body>
