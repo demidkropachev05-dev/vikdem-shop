@@ -3,577 +3,2186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VIKDEM — Магазин часов</title>
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<title>VIKDEM — Часы</title>
 
 <style>
 * {
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0b0b0b;
-    color: #fff;
+html {
+    scroll-behavior: smooth;
 }
 
+body {
+    margin: 0;
+    background: #080808;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* HEADER */
+
 header {
-    padding: 25px 20px;
-    text-align: center;
-    background: linear-gradient(135deg,#050505,#1b1b1b);
-    border-bottom: 1px solid #b89445;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(8, 8, 8, 0.96);
+    border-bottom: 1px solid #292929;
+
+    backdrop-filter: blur(10px);
+}
+
+.header {
+    max-width: 1200px;
+    margin: auto;
+
+    min-height: 75px;
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
 .logo {
-    font-size: 30px;
-    font-weight: bold;
     color: #d4af37;
-    letter-spacing: 4px;
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 5px;
 }
 
-.slogan {
-    margin-top: 8px;
-    color: #ccc;
-    font-size: 13px;
+.logo-sub {
+    margin-top: 4px;
+
+    color: #777;
+    font-size: 9px;
+    letter-spacing: 2px;
 }
 
-.container {
-    padding: 20px;
-    max-width: 600px;
+.cart-button {
+    padding: 11px 16px;
+
+    background: transparent;
+    border: 1px solid #d4af37;
+    border-radius: 8px;
+
+    color: #fff;
+    font-weight: bold;
+}
+
+.cart-button:hover {
+    background: #d4af37;
+    color: #000;
+}
+
+.cart-count {
+    color: #d4af37;
+    margin-left: 5px;
+}
+
+/* HERO */
+
+.hero {
+    max-width: 1200px;
     margin: auto;
-}
 
-.products {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 15px;
-}
+    padding: 90px 20px 70px;
 
-.product {
-    background: #151515;
-    border: 1px solid #333;
-    border-radius: 14px;
-    padding: 12px;
     text-align: center;
 }
 
+.hero h1 {
+    margin: 0;
+
+    color: #d4af37;
+
+    font-size: clamp(45px, 10vw, 90px);
+    font-weight: 900;
+    letter-spacing: 10px;
+}
+
+.hero-title {
+    margin-top: 20px;
+
+    font-size: 17px;
+    letter-spacing: 3px;
+}
+
+.hero-slogan {
+    margin-top: 12px;
+
+    color: #777;
+
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+
+/* CATALOG */
+
+.catalog {
+    max-width: 1200px;
+    margin: auto;
+
+    padding: 0 20px 80px;
+}
+
+.catalog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.catalog-title {
+    color: #d4af37;
+
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* FILTERS */
+
+.filters {
+    margin-bottom: 25px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter {
+    padding: 11px 18px;
+
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+
+    color: #aaa;
+}
+
+.filter:hover,
+.filter.active {
+    background: #d4af37;
+    border-color: #d4af37;
+    color: #000;
+}
+
+.search {
+    flex: 1;
+    min-width: 220px;
+
+    padding: 11px 15px;
+
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+
+    color: #fff;
+    outline: none;
+}
+
+.search:focus {
+    border-color: #d4af37;
+}
+
+/* PRODUCTS */
+
+.products {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(230px, 1fr));
+
+    gap: 20px;
+}
+
+.product {
+    overflow: hidden;
+
+    background: #111;
+
+    border: 1px solid #292929;
+    border-radius: 14px;
+
+    transition: .2s;
+}
+
+.product:hover {
+    transform: translateY(-4px);
+
+    border-color: #d4af37;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.45);
+}
+
 .product-image {
-    height: 170px;
-    background: #222;
-    border-radius: 10px;
+    height: 260px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #777;
-    margin-bottom: 10px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #292929 0%,
+            #0a0a0a 70%
+        );
+
+    color: #555;
+
+    font-size: 75px;
 }
 
-.product h3 {
-    margin: 8px 0;
-    font-size: 16px;
+.product-info {
+    padding: 18px;
+}
+
+.product-name {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.product-description {
+    min-height: 38px;
+
+    margin-top: 8px;
+
+    color: #777;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.product-bottom {
+    margin-top: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
 }
 
 .price {
     color: #d4af37;
+
     font-size: 20px;
     font-weight: bold;
-    margin: 8px 0;
 }
 
-button {
-    border: none;
-    border-radius: 10px;
-    padding: 12px 15px;
-    cursor: pointer;
+.add-button {
+    padding: 10px 12px;
+
+    background: #d4af37;
+    border: 0;
+    border-radius: 7px;
+
+    color: #000;
+
+    font-size: 11px;
     font-weight: bold;
 }
 
-.buy {
-    width: 100%;
-    background: linear-gradient(135deg,#d4af37,#a67c00);
-    color: #000;
+.add-button:hover {
+    background: #f1d05b;
 }
 
-.cart-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #d4af37;
-    color: #000;
-    border-radius: 50px;
-    padding: 15px 20px;
-    z-index: 10;
+/* INFO */
+
+.info {
+    max-width: 1200px;
+    margin: auto;
+
+    padding: 0 20px 80px;
 }
+
+.info-box {
+    padding: 30px;
+
+    background: #111;
+
+    border: 1px solid #292929;
+    border-radius: 14px;
+}
+
+.info-box h2 {
+    margin-top: 0;
+
+    color: #d4af37;
+}
+
+.info-box p {
+    color: #aaa;
+
+    line-height: 1.7;
+}
+
+/* OVERLAY */
 
 .overlay {
-    display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.8);
-    z-index: 20;
-    padding: 20px;
-    overflow-y: auto;
+
+    z-index: 2000;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px;
+
+    background: rgba(0,0,0,.82);
 }
+
+.overlay.active {
+    display: flex;
+}
+
+/* MODAL */
 
 .modal {
-    max-width: 500px;
-    margin: 40px auto;
-    background: #151515;
-    border: 1px solid #d4af37;
-    border-radius: 15px;
-    padding: 20px;
-}
-
-.modal h2 {
-    color: #d4af37;
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 0;
-    border-bottom: 1px solid #333;
-}
-
-input, textarea {
     width: 100%;
-    margin: 8px 0;
-    padding: 13px;
-    background: #222;
-    border: 1px solid #444;
-    color: white;
-    border-radius: 8px;
+    max-width: 600px;
+
+    max-height: 90vh;
+    overflow-y: auto;
+
+    padding: 25px;
+
+    background: #111;
+
+    border: 1px solid #333;
+    border-radius: 15px;
 }
 
-textarea {
-    min-height: 80px;
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
 }
 
-.total {
-    font-size: 22px;
+.modal-title {
     color: #d4af37;
+
+    font-size: 22px;
     font-weight: bold;
-    margin: 20px 0;
 }
 
 .close {
-    background: #333;
-    color: white;
-    width: 100%;
-    margin-top: 10px;
+    padding: 0;
+
+    background: none;
+    border: 0;
+
+    color: #fff;
+
+    font-size: 32px;
 }
 
-.success {
+/* CART */
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #292929;
+}
+
+.cart-item-name {
+    font-weight: bold;
+}
+
+.cart-item-price {
+    margin-top: 6px;
+
+    color: #d4af37;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quantity button {
+    width: 31px;
+    height: 31px;
+
+    background: #191919;
+
+    border: 1px solid #444;
+    border-radius: 5px;
+
+    color: #fff;
+}
+
+.remove {
+    margin-top: 7px;
+
+    padding: 0;
+
+    background: none;
+    border: 0;
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+.empty {
+    padding: 50px 10px;
+
     text-align: center;
-    padding: 30px 10px;
+
+    color: #777;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 25px;
+    padding-top: 20px;
+
+    border-top: 1px solid #333;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.cart-total span:last-child {
+    color: #d4af37;
+}
+
+/* BUTTON */
+
+.checkout-button {
+    width: 100%;
+
+    margin-top: 20px;
+    padding: 15px;
+
+    background: #d4af37;
+
+    border: 0;
+    border-radius: 8px;
+
+    color: #000;
+
+    font-weight: bold;
+}
+
+.checkout-button:hover {
+    background: #f1d05b;
+}
+
+/* FORM */
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #aaa;
+
+    font-size: 13px;
+}
+
+.form-control {
+    width: 100%;
+
+    padding: 13px;
+
+    background: #080808;
+
+    border: 1px solid #333;
+    border-radius: 8px;
+
+    color: #fff;
+
+    outline: none;
+}
+
+.form-control:focus {
+    border-color: #d4af37;
+}
+
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* ORDER */
+
+.order-list {
+    margin-top: 20px;
+    padding: 15px;
+
+    background: #080808;
+
+    border: 1px solid #292929;
+    border-radius: 8px;
+}
+
+.order-row {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 7px 0;
+
+    color: #aaa;
+
+    font-size: 13px;
+}
+
+.order-total {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 12px;
+    padding-top: 12px;
+
+    border-top: 1px solid #333;
+
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.order-total span:last-child {
+    color: #d4af37;
+}
+
+/* SUCCESS */
+
+.success {
+    display: none;
+
+    padding: 40px 10px;
+
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 60px;
 }
 
 .success h2 {
     color: #d4af37;
 }
+
+.success p {
+    color: #aaa;
+
+    line-height: 1.6;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 35px 20px;
+
+    border-top: 1px solid #292929;
+
+    color: #666;
+
+    text-align: center;
+
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+footer strong {
+    color: #d4af37;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .header {
+        min-height: 68px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .hero {
+        padding: 65px 20px 50px;
+    }
+
+    .hero h1 {
+        letter-spacing: 6px;
+    }
+
+    .products {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+    .product-image {
+        height: 175px;
+    }
+
+    .product-info {
+        padding: 12px;
+    }
+
+    .product-name {
+        font-size: 14px;
+    }
+
+    .product-description {
+        min-height: 35px;
+
+        font-size: 11px;
+    }
+
+    .price {
+        font-size: 16px;
+    }
+
+    .add-button {
+        padding: 8px;
+
+        font-size: 10px;
+    }
+
+    .catalog-title {
+        font-size: 21px;
+    }
+
+    .cart-button {
+        padding: 9px 10px;
+
+        font-size: 11px;
+    }
+
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">VIKDEM</div>
-    <div class="slogan">ВЫГЛЯДЯТ ДОРОЖЕ, ЧЕМ СТОЯТ</div>
-</header>
 
-<div class="container">
+<div class="header">
 
-    <div class="products">
+<div>
+<div class="logo">VIKDEM</div>
 
-        <div class="product">
-            <div class="product-image">ЧАСЫ</div>
-            <h3>Модель №1</h3>
-            <div class="price">2500 ₽</div>
-            <button class="buy" onclick="addToCart('Модель №1',2500)">
-                В корзину
-            </button>
-        </div>
-
-        <div class="product">
-            <div class="product-image">ЧАСЫ</div>
-            <h3>Модель №2</h3>
-            <div class="price">2500 ₽</div>
-            <button class="buy" onclick="addToCart('Модель №2',2500)">
-                В корзину
-            </button>
-        </div>
-
-        <div class="product">
-            <div class="product-image">ЧАСЫ</div>
-            <h3>Модель №3</h3>
-            <div class="price">2500 ₽</div>
-            <button class="buy" onclick="addToCart('Модель №3',2500)">
-                В корзину
-            </button>
-        </div>
-
-        <div class="product">
-            <div class="product-image">ЧАСЫ</div>
-            <h3>Модель №4</h3>
-            <div class="price">2500 ₽</div>
-            <button class="buy" onclick="addToCart('Модель №4',2500)">
-                В корзину
-            </button>
-        </div>
-
-    </div>
+<div class="logo-sub">
+TIME. LEGACY. OURS.
+</div>
 </div>
 
-<button class="cart-button" onclick="openCart()">
-    🛒 Корзина <span id="cartCount">0</span>
+<button
+    class="cart-button"
+    id="cartButton"
+>
+🛒 КОРЗИНА
+<span
+    class="cart-count"
+    id="cartCount"
+>0</span>
 </button>
 
-<!-- КОРЗИНА -->
-<div class="overlay" id="cartOverlay">
-    <div class="modal">
-        <h2>🛒 Корзина</h2>
-
-        <div id="cartItems"></div>
-
-        <div class="total">
-            Итого: <span id="cartTotal">0</span> ₽
-        </div>
-
-        <button class="buy" onclick="openCheckout()">
-            Оформить заказ
-        </button>
-
-        <button class="close" onclick="closeCart()">
-            Закрыть
-        </button>
-    </div>
 </div>
 
-<!-- ОФОРМЛЕНИЕ -->
-<div class="overlay" id="checkoutOverlay">
-    <div class="modal">
-        <h2>📦 Оформление заказа</h2>
+</header>
 
-        <input id="customerName" placeholder="Ваше имя">
+<section class="hero">
 
-        <input id="customerPhone" placeholder="Телефон">
+<h1>VIKDEM</h1>
 
-        <input id="customerAddress" placeholder="Адрес доставки">
-
-        <textarea id="customerComment"
-                  placeholder="Комментарий к заказу"></textarea>
-
-        <div id="orderPreview"></div>
-
-        <button class="buy" onclick="submitOrder()">
-            🚀 Оформить заказ
-        </button>
-
-        <button class="close" onclick="closeCheckout()">
-            Назад
-        </button>
-    </div>
+<div class="hero-title">
+ЧАСЫ, КОТОРЫЕ ВЫГЛЯДЯТ ДОРОЖЕ
 </div>
 
-<!-- УСПЕШНЫЙ ЗАКАЗ -->
-<div class="overlay" id="successOverlay">
-    <div class="modal success">
-        <h2>✅ Заказ оформлен!</h2>
+<div class="hero-slogan">
+ВЫГЛЯДЯТ ДОРОЖЕ, ЧЕМ СТОЯТ
+</div>
 
-        <p>
-            Спасибо за заказ в VIKDEM.
-        </p>
+</section>
 
-        <p>
-            Мы свяжемся с вами для подтверждения.
-        </p>
+<section class="catalog">
 
-        <button class="buy" onclick="closeSuccess()">
-            Вернуться в магазин
-        </button>
-    </div>
+<div class="catalog-header">
+
+<div class="catalog-title">
+КАТАЛОГ
+</div>
+
+</div>
+
+<div class="filters">
+
+<button
+    class="filter active"
+    data-filter="all"
+>
+ВСЕ
+</button>
+
+<button
+    class="filter"
+    data-filter="men"
+>
+МУЖСКИЕ
+</button>
+
+<button
+    class="filter"
+    data-filter="women"
+>
+ЖЕНСКИЕ
+</button>
+
+<input
+    class="search"
+    id="search"
+    type="text"
+    placeholder="🔎 Поиск модели..."
+>
+
+</div>
+
+<div
+    class="products"
+    id="products"
+>
+
+<!-- PRODUCT 698 -->
+
+<div
+    class="product"
+    data-category="men"
+    data-name="poedagar 698"
+>
+
+<div class="product-image">
+⌚
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+POEDAGAR 698
+</div>
+
+<div class="product-description">
+Классическая мужская модель
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+2 500 ₽
+</div>
+
+<button
+    class="add-button"
+    data-id="698"
+>
+В КОРЗИНУ
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT 936 -->
+
+<div
+    class="product"
+    data-category="men"
+    data-name="poedagar 936"
+>
+
+<div class="product-image">
+⌚
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+POEDAGAR 936
+</div>
+
+<div class="product-description">
+Стильная мужская модель
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+2 500 ₽
+</div>
+
+<button
+    class="add-button"
+    data-id="936"
+>
+В КОРЗИНУ
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT 960 -->
+
+<div
+    class="product"
+    data-category="men"
+    data-name="poedagar 960"
+>
+
+<div class="product-image">
+⌚
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+POEDAGAR 960
+</div>
+
+<div class="product-description">
+Элегантная мужская модель
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+2 500 ₽
+</div>
+
+<button
+    class="add-button"
+    data-id="960"
+>
+В КОРЗИНУ
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT 970 -->
+
+<div
+    class="product"
+    data-category="men"
+    data-name="poedagar 970"
+>
+
+<div class="product-image">
+⌚
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+POEDAGAR 970
+</div>
+
+<div class="product-description">
+Современная мужская модель
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+2 500 ₽
+</div>
+
+<button
+    class="add-button"
+    data-id="970"
+>
+В КОРЗИНУ
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT 896 -->
+
+<div
+    class="product"
+    data-category="men"
+    data-name="poedagar 896"
+>
+
+<div class="product-image">
+⌚
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+POEDAGAR 896
+</div>
+
+<div class="product-description">
+Классическая модель
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+2 500 ₽
+</div>
+
+<button
+    class="add-button"
+    data-id="896"
+>
+В КОРЗИНУ
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT 866 -->
+
+<div
+    class="product"
+    data-category="men"
+    data-name="poedagar 866"
+>
+
+<div class="product-image">
+⌚
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+POEDAGAR 866
+</div>
+
+<div class="product-description">
+Мужские часы POEDAGAR
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+2 500 ₽
+</div>
+
+<button
+    class="add-button"
+    data-id="866"
+>
+В КОРЗИНУ
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT 825 -->
+
+<div
+    class="product"
+    data-category="men"
+    data-name="poedagar 825"
+>
+
+<div class="product-image">
+⌚
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+POEDAGAR 825
+</div>
+
+<div class="product-description">
+Стильные мужские часы
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+2 500 ₽
+</div>
+
+<button
+    class="add-button"
+    data-id="825"
+>
+В КОРЗИНУ
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT 673 -->
+
+<div
+    class="product"
+    data-category="men"
+    data-name="poedagar 673"
+>
+
+<div class="product-image">
+⌚
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+POEDAGAR 673
+</div>
+
+<div class="product-description">
+Мужские часы
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+2 500 ₽
+</div>
+
+<button
+    class="add-button"
+    data-id="673"
+>
+В КОРЗИНУ
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT 878 -->
+
+<div
+    class="product"
+    data-category="men"
+    data-name="poedagar 878"
+>
+
+<div class="product-image">
+⌚
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+POEDAGAR 878
+</div>
+
+<div class="product-description">
+Элегантные мужские часы
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+2 500 ₽
+</div>
+
+<button
+    class="add-button"
+    data-id="878"
+>
+В КОРЗИНУ
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRODUCT 780 -->
+
+<div
+    class="product"
+    data-category="men"
+    data-name="poedagar 780"
+>
+
+<div class="product-image">
+⌚
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+POEDAGAR 780
+</div>
+
+<div class="product-description">
+Мужские часы
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+2 500 ₽
+</div>
+
+<button
+    class="add-button"
+    data-id="780"
+>
+В КОРЗИНУ
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- WOMEN -->
+
+<div
+    class="product"
+    data-category="women"
+    data-name="poedagar women 1"
+>
+
+<div class="product-image">
+⌚
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+POEDAGAR WOMEN 1
+</div>
+
+<div class="product-description">
+Женская коллекция
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+2 500 ₽
+</div>
+
+<button
+    class="add-button"
+    data-id="1001"
+>
+В КОРЗИНУ
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+    class="product"
+    data-category="women"
+    data-name="poedagar women 2"
+>
+
+<div class="product-image">
+⌚
+</div>
+
+<div class="product-info">
+
+<div class="product-name">
+POEDAGAR WOMEN 2
+</div>
+
+<div class="product-description">
+Женская коллекция
+</div>
+
+<div class="product-bottom">
+
+<div class="price">
+2 500 ₽
+</div>
+
+<button
+    class="add-button"
+    data-id="1002"
+>
+В КОРЗИНУ
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="info">
+
+<div class="info-box">
+
+<h2>
+VIKDEM
+</h2>
+
+<p>
+Оригинальная продукция POEDAGAR.
+</p>
+
+<p>
+⌚ Стильные часы по доступной цене.
+</p>
+
+<p>
+🚚 Бесплатная доставка по Анапе.<br>
+⚡ Доставка в день заказа.<br>
+👀 Можно осмотреть часы при получении.<br>
+↩️ Если часы не подошли — можно отказаться.
+</p>
+
+<p>
+Для заказа: <strong>@RodKinWarrior</strong>
+</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<strong>VIKDEM</strong>
+
+<br>
+
+TIME. LEGACY. OURS.
+
+<br>
+
+ВЫГЛЯДЯТ ДОРОЖЕ, ЧЕМ СТОЯТ
+
+<br><br>
+
+Telegram: @RodKinWarrior
+
+</footer>
+
+<!-- CART -->
+
+<div
+    class="overlay"
+    id="cartOverlay"
+>
+
+<div class="modal">
+
+<div class="modal-header">
+
+<div class="modal-title">
+ВАША КОРЗИНА
+</div>
+
+<button
+    class="close"
+    id="closeCart"
+>
+×
+</button>
+
+</div>
+
+<div id="cartItems"></div>
+
+<div class="cart-total">
+
+<span>
+ИТОГО:
+</span>
+
+<span id="cartTotal">
+0 ₽
+</span>
+
+</div>
+
+<button
+    class="checkout-button"
+    id="checkoutButton"
+>
+ОФОРМИТЬ ЗАКАЗ
+</button>
+
+</div>
+
+</div>
+
+<!-- CHECKOUT -->
+
+<div
+    class="overlay"
+    id="checkoutOverlay"
+>
+
+<div class="modal">
+
+<div class="modal-header">
+
+<div class="modal-title">
+ОФОРМЛЕНИЕ ЗАКАЗА
+</div>
+
+<button
+    class="close"
+    id="closeCheckout"
+>
+×
+</button>
+
+</div>
+
+<div id="checkoutForm">
+
+<div class="form-group">
+
+<label>
+Ваше имя
+</label>
+
+<input
+    class="form-control"
+    id="customerName"
+    type="text"
+    placeholder="Введите имя"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+Телефон
+</label>
+
+<input
+    class="form-control"
+    id="customerPhone"
+    type="tel"
+    placeholder="+7 900 000-00-00"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+Город
+</label>
+
+<input
+    class="form-control"
+    id="customerCity"
+    type="text"
+    value="Анапа"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+Способ получения
+</label>
+
+<select
+    class="form-control"
+    id="deliveryType"
+>
+
+<option value="Доставка">
+Доставка
+</option>
+
+<option value="Самовывоз">
+Самовывоз
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+Комментарий
+</label>
+
+<textarea
+    class="form-control"
+    id="customerComment"
+    placeholder="Например: удобное время доставки"
+></textarea>
+
+</div>
+
+<div class="order-list">
+
+<div id="orderItems"></div>
+
+<div class="order-total">
+
+<span>
+ИТОГО
+</span>
+
+<span id="orderTotal">
+0 ₽
+</span>
+
+</div>
+
+</div>
+
+<button
+    class="checkout-button"
+    id="submitOrder"
+>
+ПОДТВЕРДИТЬ ЗАКАЗ
+</button>
+
+</div>
+
+<div
+    class="success"
+    id="success"
+>
+
+<div class="success-icon">
+✓
+</div>
+
+<h2>
+ЗАКАЗ ПРИНЯТ
+</h2>
+
+<p>
+Спасибо за заказ в VIKDEM.<br>
+Мы свяжемся с вами для подтверждения.
+</p>
+
+<button
+    class="checkout-button"
+    id="backButton"
+>
+ВЕРНУТЬСЯ В МАГАЗИН
+</button>
+
+</div>
+
+</div>
+
 </div>
 
 <script>
 
-const tg = window.Telegram.WebApp;
+const products = [
 
-tg.ready();
-tg.expand();
+    {
+        id: 698,
+        name: "POEDAGAR 698",
+        price: 2500
+    },
 
-let cart = JSON.parse(
-    localStorage.getItem('vikdem_cart') || '[]'
-);
+    {
+        id: 936,
+        name: "POEDAGAR 936",
+        price: 2500
+    },
 
-function saveCart() {
-    localStorage.setItem(
-        'vikdem_cart',
-        JSON.stringify(cart)
-    );
-}
+    {
+        id: 960,
+        name: "POEDAGAR 960",
+        price: 2500
+    },
 
-function addToCart(name, price) {
+    {
+        id: 970,
+        name: "POEDAGAR 970",
+        price: 2500
+    },
 
-    const existing = cart.find(
-        item => item.name === name
-    );
+    {
+        id: 896,
+        name: "POEDAGAR 896",
+        price: 2500
+    },
 
-    if (existing) {
-        existing.qty++;
-    } else {
-        cart.push({
-            name: name,
-            price: price,
-            qty: 1
-        });
+    {
+        id: 866,
+        name: "POEDAGAR 866",
+        price: 2500
+    },
+
+    {
+        id: 825,
+        name: "POEDAGAR 825",
+        price: 2500
+    },
+
+    {
+        id: 673,
+        name: "POEDAGAR 673",
+        price: 2500
+    },
+
+    {
+        id: 878,
+        name: "POEDAGAR 878",
+        price: 2500
+    },
+
+    {
+        id: 780,
+        name: "POEDAGAR 780",
+        price: 2500
+    },
+
+    {
+        id: 1001,
+        name: "POEDAGAR WOMEN 1",
+        price: 2500
+    },
+
+    {
+        id: 1002,
+        name: "POEDAGAR WOMEN 2",
+        price: 2500
     }
 
-    saveCart();
-    updateCart();
+];
 
-    tg.HapticFeedback.impactOccurred('light');
-}
+let cart = [];
 
-function updateCart() {
+/* CART COUNT */
+
+function updateCartCount() {
 
     const count = cart.reduce(
-        (sum,item) => sum + item.qty,
+        (total, item) =>
+            total + item.quantity,
         0
     );
 
-    document.getElementById('cartCount').textContent = count;
+    document.getElementById(
+        "cartCount"
+    ).textContent = count;
 
-    const container =
-        document.getElementById('cartItems');
-
-    if (!cart.length) {
-
-        container.innerHTML =
-            '<p>Корзина пуста.</p>';
-
-        document.getElementById('cartTotal')
-            .textContent = '0';
-
-        return;
-    }
-
-    let total = 0;
-
-    container.innerHTML = cart.map((item,index) => {
-
-        const itemTotal =
-            item.price * item.qty;
-
-        total += itemTotal;
-
-        return `
-        <div class="cart-item">
-
-            <div>
-                <b>${item.name}</b><br>
-                ${item.price} ₽ × ${item.qty}
-            </div>
-
-            <div>
-                <button
-                    onclick="changeQty(${index},-1)">
-                    −
-                </button>
-
-                <button
-                    onclick="changeQty(${index},1)">
-                    +
-                </button>
-            </div>
-
-        </div>
-        `;
-
-    }).join('');
-
-    document.getElementById('cartTotal')
-        .textContent = total;
 }
 
-function changeQty(index,value) {
+/* ADD */
 
-    cart[index].qty += value;
+document
+    .querySelectorAll(".add-button")
+    .forEach(button => {
 
-    if (cart[index].qty <= 0) {
-        cart.splice(index,1);
-    }
+        button.addEventListener(
+            "click",
+            function() {
 
-    saveCart();
-    updateCart();
-}
+                const id =
+                    Number(
+                        this.dataset.id
+                    );
 
-function openCart() {
+                const product =
+                    products.find(
+                        item =>
+                            item.id === id
+                    );
 
-    updateCart();
+                if (!product) return;
 
-    document.getElementById('cartOverlay')
-        .style.display = 'block';
-}
+                const existing =
+                    cart.find(
+                        item =>
+                            item.id === id
+                    );
 
-function closeCart() {
+                if (existing) {
 
-    document.getElementById('cartOverlay')
-        .style.display = 'none';
-}
+                    existing.quantity++;
 
-function openCheckout() {
+                } else {
 
-    if (!cart.length) {
-        alert('Корзина пуста');
-        return;
-    }
+                    cart.push({
 
-    closeCart();
+                        id: product.id,
 
-    buildOrderPreview();
+                        name: product.name,
 
-    document.getElementById('checkoutOverlay')
-        .style.display = 'block';
-}
+                        price: product.price,
 
-function closeCheckout() {
+                        quantity: 1
 
-    document.getElementById('checkoutOverlay')
-        .style.display = 'none';
-}
+                    });
 
-function buildOrderPreview() {
+                }
 
-    let total = 0;
+                updateCartCount();
 
-    const html = cart.map(item => {
+                this.textContent =
+                    "ДОБАВЛЕНО ✓";
 
-        const sum =
-            item.price * item.qty;
+                setTimeout(() => {
 
-        total += sum;
+                    this.textContent =
+                        "В КОРЗИНУ";
 
-        return `
-            <p>
-                ${item.name} —
-                ${item.qty} шт. —
-                ${sum} ₽
-            </p>
-        `;
+                }, 800);
 
-    }).join('');
-
-    document.getElementById('orderPreview')
-        .innerHTML =
-        html +
-        `<strong>Итого: ${total} ₽</strong>`;
-}
-
-function submitOrder() {
-
-    const name =
-        document.getElementById('customerName')
-        .value.trim();
-
-    const phone =
-        document.getElementById('customerPhone')
-        .value.trim();
-
-    const address =
-        document.getElementById('customerAddress')
-        .value.trim();
-
-    const comment =
-        document.getElementById('customerComment')
-        .value.trim();
-
-    if (!name || !phone || !address) {
-
-        alert(
-            'Заполните имя, телефон и адрес доставки.'
+            }
         );
 
-        return;
-    }
+    });
 
-    let total = cart.reduce(
-        (sum,item) =>
-            sum + item.price * item.qty,
-        0
+/* CART */
+
+const cartOverlay =
+    document.getElementById(
+        "cartOverlay"
     );
 
-    const order = {
+const cartItems =
+    document.getElementById(
+        "cartItems"
+    );
 
-        shop: 'VIKDEM',
+const cartTotal =
+    document.getElementById(
+        "cartTotal"
+    );
 
-        name: name,
+function renderCart() {
 
-        phone: phone,
+    if (cart.length === 0) {
 
-        address: address,
+        cartItems.innerHTML = `
 
-        comment: comment,
+            <div class="empty">
 
-        items: cart,
+                🛒
 
-        total: total,
+                <br><br>
 
-        createdAt:
-            new Date().toISOString()
+                Корзина пока пуста
+
+            </div>
+
+        `;
+
+        cartTotal.textContent =
+            "0 ₽";
+
+        return;
+
+    }
+
+    cartItems.innerHTML =
+        cart.map(item => `
+
+            <div class="cart-item">
+
+                <div>
+
+                    <div class="cart-item-name">
+
+                        ${item.name}
+
+                    </div>
+
+                    <div class="cart-item-price">
+
+                        ${(item.price * item.quantity)
+                            .toLocaleString("ru-RU")} ₽
+
+                    </div>
+
+                    <button
+                        class="remove"
+                        onclick="removeItem(${item.id})"
+                    >
+
+                        Удалить
+
+                    </button>
+
+                </div>
+
+                <div class="quantity">
+
+                    <button
+                        onclick="changeQuantity(${item.id}, -1)"
+                    >
+                        −
+                    </button>
+
+                    <span>
+                        ${item.quantity}
+                    </span>
+
+                    <button
+                        onclick="changeQuantity(${item.id}, 1)"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+        `).join("");
+
+    const total =
+        cart.reduce(
+            (sum, item) =>
+                sum +
+                item.price *
+                item.quantity,
+            0
+        );
+
+    cartTotal.textContent =
+        total.toLocaleString("ru-RU") +
+        " ₽";
+
+}
+
+window.changeQuantity =
+    function(id, amount) {
+
+        const item =
+            cart.find(
+                product =>
+                    product.id === id
+            );
+
+        if (!item) return;
+
+        item.quantity += amount;
+
+        if (item.quantity <= 0) {
+
+            cart =
+                cart.filter(
+                    product =>
+                        product.id !== id
+                );
+
+        }
+
+        updateCartCount();
+
+        renderCart();
+
     };
 
-    /*
-       СОХРАНЯЕМ ЗАКАЗ ЛОКАЛЬНО
-    */
+window.removeItem =
+    function(id) {
 
-    localStorage.setItem(
-        'vikdem_last_order',
-        JSON.stringify(order)
+        cart =
+            cart.filter(
+                item =>
+                    item.id !== id
+            );
+
+        updateCartCount();
+
+        renderCart();
+
+    };
+
+/* OPEN CART */
+
+document
+    .getElementById("cartButton")
+    .addEventListener(
+        "click",
+        function() {
+
+            renderCart();
+
+            cartOverlay.classList.add(
+                "active"
+            );
+
+        }
     );
 
-    /*
-       ОТПРАВЛЯЕМ ЗАКАЗ В TELEGRAM
-    */
+/* CLOSE CART */
 
-    if (
-        window.Telegram &&
-        Telegram.WebApp &&
-        Telegram.WebApp.sendData
-    ) {
+document
+    .getElementById("closeCart")
+    .addEventListener(
+        "click",
+        function() {
 
-        Telegram.WebApp.sendData(
-            JSON.stringify(order)
+            cartOverlay.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+/* CHECKOUT */
+
+const checkoutOverlay =
+    document.getElementById(
+        "checkoutOverlay"
+    );
+
+const orderItems =
+    document.getElementById(
+        "orderItems"
+    );
+
+const orderTotal =
+    document.getElementById(
+        "orderTotal"
+    );
+
+function renderOrder() {
+
+    orderItems.innerHTML =
+        cart.map(item => `
+
+            <div class="order-row">
+
+                <span>
+
+                    ${item.name}
+                    × ${item.quantity}
+
+                </span>
+
+                <span>
+
+                    ${(item.price * item.quantity)
+                        .toLocaleString("ru-RU")} ₽
+
+                </span>
+
+            </div>
+
+        `).join("");
+
+    const total =
+        cart.reduce(
+            (sum, item) =>
+                sum +
+                item.price *
+                item.quantity,
+            0
         );
 
-    }
+    orderTotal.textContent =
+        total.toLocaleString("ru-RU") +
+        " ₽";
 
-    cart = [];
+}
 
-    saveCart();
+document
+    .getElementById("checkoutButton")
+    .addEventListener(
+        "click",
+        function() {
 
-    updateCart();
+            if (cart.length === 0) {
 
-    closeCheckout();
+                alert(
+                    "Сначала добавьте часы в корзину."
+                );
 
-    document.getElementById('successOverlay')
-        .style.display = 'block';
+                return;
 
-    tg.HapticFeedback.notificationOccurred(
-        'success'
+            }
+
+            renderOrder();
+
+            cartOverlay.classList.remove(
+                "active"
+            );
+
+            checkoutOverlay.classList.add(
+                "active"
+            );
+
+        }
     );
+
+/* CLOSE CHECKOUT */
+
+document
+    .getElementById("closeCheckout")
+    .addEventListener(
+        "click",
+        function() {
+
+            checkoutOverlay.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+/* SUBMIT ORDER */
+
+document
+    .getElementById("submitOrder")
+    .addEventListener(
+        "click",
+        function() {
+
+            const name =
+                document
+                    .getElementById(
+                        "customerName"
+                    )
+                    .value
+                    .trim();
+
+            const phone =
+                document
+                    .getElementById(
+                        "customerPhone"
+                    )
+                    .value
+                    .trim();
+
+            const city =
+                document
+                    .getElementById(
+                        "customerCity"
+                    )
+                    .value
+                    .trim();
+
+            if (!name) {
+
+                alert(
+                    "Введите ваше имя."
+                );
+
+                return;
+
+            }
+
+            if (!phone) {
+
+                alert(
+                    "Введите номер телефона."
+                );
+
+                return;
+
+            }
+
+            if (!city) {
+
+                alert(
+                    "Введите город."
+                );
+
+                return;
+
+            }
+
+            document.getElementById(
+                "checkoutForm"
+            ).style.display = "none";
+
+            document.getElementById(
+                "success"
+            ).style.display = "block";
+
+        }
+    );
+
+/* BACK */
+
+document
+    .getElementById("backButton")
+    .addEventListener(
+        "click",
+        function() {
+
+            checkoutOverlay.classList.remove(
+                "active"
+            );
+
+            document.getElementById(
+                "checkoutForm"
+            ).style.display = "block";
+
+            document.getElementById(
+                "success"
+            ).style.display = "none";
+
+        }
+    );
+
+/* FILTER */
+
+const filters =
+    document.querySelectorAll(
+        ".filter"
+    );
+
+const search =
+    document.getElementById(
+        "search"
+    );
+
+function filterProducts() {
+
+    const active =
+        document
+            .querySelector(
+                ".filter.active"
+            )
+            .dataset.filter;
+
+    const searchText =
+        search.value
+            .toLowerCase()
+            .trim();
+
+    document
+        .querySelectorAll(".product")
+        .forEach(card => {
+
+            const category =
+                card.dataset.category;
+
+            const name =
+                card.dataset.name;
+
+            const categoryMatch =
+                active === "all" ||
+                category === active;
+
+            const searchMatch =
+                name.includes(
+                    searchText
+                );
+
+            if (
+                categoryMatch &&
+                searchMatch
+            ) {
+
+                card.style.display = "";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
 }
 
-function closeSuccess() {
+filters.forEach(button => {
 
-    document.getElementById('successOverlay')
-        .style.display = 'none';
-}
+    button.addEventListener(
+        "click",
+        function() {
 
-updateCart();
+            filters.forEach(
+                item =>
+                    item.classList.remove(
+                        "active"
+                    )
+            );
+
+            this.classList.add(
+                "active"
+            );
+
+            filterProducts();
+
+        }
+    );
+
+});
+
+search.addEventListener(
+    "input",
+    filterProducts
+);
 
 </script>
 
