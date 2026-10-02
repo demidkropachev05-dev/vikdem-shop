@@ -243,6 +243,42 @@ footer{padding:40px 0 calc(35px + env(safe-area-inset-bottom));text-align:center
   .panel{padding:12px}
   .search{min-width:100%}
 }
+
+/* ===== VIKDEM PRO ENHANCEMENTS ===== */
+.header-actions{display:flex;gap:8px;align-items:center}
+.icon-btn{position:relative;border:1px solid var(--line);background:rgba(0,0,0,.5);color:var(--text);border-radius:12px;min-width:42px;height:42px;font-size:18px;cursor:pointer}
+.icon-btn .badge{position:absolute;right:-5px;top:-5px;min-width:18px;height:18px;padding:0 5px;border-radius:99px;background:var(--gold);color:#080808;font:700 10px Arial;display:grid;place-items:center}
+.product{position:relative;overflow:hidden}
+.product:hover{transform:translateY(-2px)}
+.badges{position:absolute;left:10px;top:10px;display:flex;flex-wrap:wrap;gap:5px;z-index:2;max-width:78%}
+.badge-tag{padding:5px 7px;border:1px solid rgba(224,182,83,.35);background:rgba(0,0,0,.72);border-radius:7px;color:var(--gold2);font:700 8px Arial;letter-spacing:.5px}
+.product .visual{position:relative}
+.product .visual .watch{font-size:64px;filter:drop-shadow(0 10px 18px rgba(0,0,0,.6));transition:transform .25s}
+.product:hover .visual .watch{transform:scale(1.05)}
+.buy-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.buy-now{border:1px solid var(--gold);background:transparent;color:var(--gold2);border-radius:9px;padding:11px 8px;font:700 10px Arial;cursor:pointer}
+.quick{width:100%;margin-top:7px}
+.section-anchor{scroll-margin-top:80px}
+.feature-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mini-card{padding:15px;border:1px solid var(--line);background:rgba(0,0,0,.55);border-radius:14px}
+.mini-card b{display:block;color:var(--gold2);font:700 11px Arial;letter-spacing:.6px;margin-bottom:7px}
+.mini-card span{color:#b8b2a6;font:11px Arial;line-height:1.45}
+.constructor{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.constructor select,.promo-input,.field input,.field textarea,.field select{width:100%;background:rgba(0,0,0,.6);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px;outline:none}
+.constructor label{font:9px Arial;color:#aaa;display:block;margin-bottom:5px;text-transform:uppercase}
+.recent-grid,.recommend-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mini-product{border:1px solid var(--line);background:rgba(0,0,0,.58);border-radius:14px;padding:10px;cursor:pointer}
+.mini-product .mini-watch{height:105px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(224,182,83,.12),rgba(0,0,0,.25));font-size:42px}
+.mini-product b{display:block;margin-top:8px;font-size:11px}.mini-product span{display:block;color:var(--gold2);font:700 12px Arial;margin-top:5px}
+.coming{border:1px dashed rgba(224,182,83,.38);background:rgba(0,0,0,.52);border-radius:16px;padding:22px;text-align:center}
+.coming .big{font-size:30px;margin-bottom:8px}.coming b{color:var(--gold2);font:700 12px Arial}.coming p{color:#aaa;font:11px Arial;line-height:1.5;margin:8px auto 0;max-width:520px}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.review-card{border:1px solid var(--line);background:rgba(0,0,0,.55);border-radius:14px;padding:15px}.review-card .stars{color:var(--gold2);letter-spacing:2px}.review-card p{color:#aaa;font:11px Arial;line-height:1.5}.review-card small{color:#777;font:9px Arial}
+.contact-row{display:flex;gap:8px;flex-wrap:wrap}.contact-row a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.check-row{display:flex;align-items:center;gap:9px;padding:11px 0;color:#bdb7aa;font:11px Arial}.check-row input{accent-color:var(--gold)}
+.promo-box{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end}.promo-code{display:flex;gap:7px}.promo-code input{flex:1}.promo-message{font:10px Arial;color:#aaa;margin-top:7px;min-height:14px}.discount-line{display:flex;justify-content:space-between;color:#bbb;font:10px Arial;margin-top:6px}.discount-line strong{color:var(--gold2)}
+.modal.large{max-width:620px}.gallery{display:grid;grid-template-columns:1.4fr .6fr;gap:8px}.gallery-main,.gallery-thumb{border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,rgba(224,182,83,.1),rgba(0,0,0,.4));display:grid;place-items:center;overflow:hidden}.gallery-main{min-height:250px}.gallery-thumb{min-height:75px;font-size:25px}.gallery-main .watch{font-size:86px}.specs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.spec{padding:9px;border:1px solid rgba(224,182,83,.14);border-radius:9px;background:rgba(0,0,0,.35)}.spec span{display:block;color:#777;font:8px Arial;text-transform:uppercase}.spec b{display:block;margin-top:3px;font:11px Arial;color:#ddd}
+@media(max-width:700px){.feature-strip,.constructor,.recent-grid,.recommend-grid,.review-grid{grid-template-columns:1fr}.promo-box{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.gallery-main{min-height:210px}.header-actions{gap:5px}.icon-btn{min-width:39px;height:39px}.buy-row{grid-template-columns:1fr 1fr}}
+
 </style>
 </head>
 <body>
@@ -325,6 +361,63 @@ footer{padding:40px 0 calc(35px + env(safe-area-inset-bottom));text-align:center
     </div>
   </section>
 
+
+  <section class="section section-anchor" id="newArrivals">
+    <div class="container">
+      <div class="section-head"><div class="section-kicker">NEW ARRIVALS</div><h2>НОВИНКИ</h2><div class="section-desc">Актуальная подборка моделей VIKDEM. Фотографии можно добавить позже без переделки каталога.</div></div>
+      <div class="feature-strip">
+        <div class="mini-card"><b>✦ Актуальная коллекция</b><span>Сейчас в каталоге — 6 моделей POEDAGAR.</span></div>
+        <div class="mini-card"><b>♢ Осмотр перед покупкой</b><span>Можно осмотреть и примерить часы при доставке.</span></div>
+        <div class="mini-card"><b>⌁ Доставка</b><span>В Анапе доставка бесплатная, условия можно обсудить с продавцом.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-anchor" id="styleConstructor">
+    <div class="container">
+      <div class="section-head"><div class="section-kicker">STYLE CONSTRUCTOR</div><h2>ПОДБОР МОДЕЛИ</h2><div class="section-desc">Выберите параметры — каталог автоматически покажет подходящие часы.</div></div>
+      <div class="panel">
+        <div class="constructor">
+          <div><label>Кому</label><select id="styleGender"><option value="all">Любой вариант</option><option value="men">Мужские</option><option value="women">Женские</option></select></div>
+          <div><label>Бюджет</label><select id="styleBudget"><option value="all">Любой</option><option value="2500">До 2 500 ₽</option><option value="3000">До 3 000 ₽</option></select></div>
+          <div><label>Сортировка</label><select id="styleSort"><option value="recommended">Рекомендуемые</option><option value="priceAsc">Сначала дешевле</option><option value="priceDesc">Сначала дороже</option></select></div>
+        </div>
+        <button class="primary full" id="applyStyle" style="margin-top:10px">ПОДОБРАТЬ</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-anchor" id="recentSection" style="display:none">
+    <div class="container">
+      <div class="section-head"><div class="section-kicker">RECENTLY VIEWED</div><h2>ВЫ СМОТРЕЛИ</h2></div>
+      <div class="recent-grid" id="recentGrid"></div>
+    </div>
+  </section>
+
+  <section class="section section-anchor" id="recommendSection">
+    <div class="container">
+      <div class="section-head"><div class="section-kicker">RECOMMENDED</div><h2>ВАМ МОЖЕТ ПОНРАВИТЬСЯ</h2></div>
+      <div class="recommend-grid" id="recommendGrid"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="coming"><div class="big">⌚</div><b>СКОРО НОВЫЕ МОДЕЛИ</b><p>Новые мужские и женские часы будут добавляться сюда по мере появления в ассортименте.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="reviews">
+    <div class="container">
+      <div class="section-head"><div class="section-kicker">REVIEWS</div><h2>ОТЗЫВЫ</h2><div class="section-desc">Раздел подготовлен для реальных отзывов покупателей.</div></div>
+      <div class="review-grid">
+        <div class="review-card"><div class="stars">★★★★★</div><p>Здесь появится реальный отзыв покупателя.</p><small>ОТЗЫВ БУДЕТ ДОБАВЛЕН ПОСЛЕ ПОЛУЧЕНИЯ</small></div>
+        <div class="review-card"><div class="stars">★★★★★</div><p>Здесь появится реальный отзыв покупателя.</p><small>ОТЗЫВ БУДЕТ ДОБАВЛЕН ПОСЛЕ ПОЛУЧЕНИЯ</small></div>
+        <div class="review-card"><div class="stars">★★★★★</div><p>Здесь появится реальный отзыв покупателя.</p><small>ОТЗЫВ БУДЕТ ДОБАВЛЕН ПОСЛЕ ПОЛУЧЕНИЯ</small></div>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
       <div class="promo">
@@ -362,6 +455,18 @@ footer{padding:40px 0 calc(35px + env(safe-area-inset-bottom));text-align:center
       </div>
     </div>
   </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><div class="section-kicker">CONTACT</div><h2>СВЯЗАТЬСЯ С VIKDEM</h2></div>
+      <div class="contact-row">
+        <a class="secondary" href="https://t.me/VIKDEM_ShopBot" target="_blank" rel="noopener">ОТКРЫТЬ БОТА</a>
+        <a class="secondary" href="https://t.me/V_IK_DE_M" target="_blank" rel="noopener">TELEGRAM-КАНАЛ</a>
+        <button class="secondary" id="shareShop">ПОДЕЛИТЬСЯ</button>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -388,7 +493,7 @@ footer{padding:40px 0 calc(35px + env(safe-area-inset-bottom));text-align:center
 </div>
 
 <div class="overlay" id="productOverlay">
-  <div class="modal">
+  <div class="modal large">
     <div class="modal-head"><h3 id="modalTitle">VIKDEM</h3><button class="close" data-close="productOverlay">✕</button></div>
     <div class="visual" style="border-radius:10px"><div class="watch">⌚</div></div>
     <div class="product-desc" id="modalDesc" style="margin-top:15px"></div>
@@ -428,227 +533,80 @@ footer{padding:40px 0 calc(35px + env(safe-area-inset-bottom));text-align:center
 
 <script>
 const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
-if(tg){
-  try{ tg.ready(); tg.expand(); }catch(e){}
-}
-
-const WORKER_URL = "https://vikdem-telegram.demidkropache05.workers.dev/";
-
-const products = [
-  {id:698,name:"POEDAGAR 698",price:2500,category:"men",description:"Классическая мужская модель"},
-  {id:960,name:"POEDAGAR 960",price:2500,category:"men",description:"Элегантная мужская модель"},
-  {id:970,name:"POEDAGAR 970",price:2500,category:"men",description:"Современная мужская модель"},
-  {id:878,name:"POEDAGAR 878",price:2500,category:"men",description:"Элегантные мужские часы"},
-  {id:825,name:"POEDAGAR 825",price:2500,category:"men",description:"Стильные мужские часы"},
-  {id:780,name:"POEDAGAR 780",price:2500,category:"women",description:"Женская модель POEDAGAR"}
+if(tg){try{tg.ready();tg.expand();}catch(e){}}
+const WORKER_URL="https://vikdem-telegram.demidkropache05.workers.dev/";
+const products=[
+{id:698,name:"POEDAGAR 698",price:2500,category:"men",description:"Классическая мужская модель",badge:"ХИТ",style:"classic",stock:true},
+{id:960,name:"POEDAGAR 960",price:2500,category:"men",description:"Элегантная мужская модель",badge:"НОВИНКА",style:"elegant",stock:true},
+{id:970,name:"POEDAGAR 970",price:2500,category:"men",description:"Современная мужская модель",badge:"В НАЛИЧИИ",style:"modern",stock:true},
+{id:878,name:"POEDAGAR 878",price:2500,category:"men",description:"Элегантные мужские часы",badge:"В НАЛИЧИИ",style:"elegant",stock:true},
+{id:825,name:"POEDAGAR 825",price:2500,category:"men",description:"Стильные мужские часы",badge:"ВЫБОР VIKDEM",style:"modern",stock:true},
+{id:780,name:"POEDAGAR 780",price:2500,category:"women",description:"Женская модель POEDAGAR",badge:"НОВИНКА",style:"elegant",stock:true}
 ];
-
-let cart = JSON.parse(localStorage.getItem("vikdem_cart") || "[]");
-let favorites = JSON.parse(localStorage.getItem("vikdem_favorites") || "[]");
-let currentFilter = "all";
-let currentSearch = "";
-let selectedProduct = null;
-
-const $ = id => document.getElementById(id);
-const money = n => Number(n).toLocaleString("ru-RU") + " ₽";
-
-function haptic(){
-  try{ if(tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred("light"); }catch(e){}
-}
-function toast(text){
-  const el=$("toast"); el.textContent=text; el.classList.add("show");
-  clearTimeout(window.__toast); window.__toast=setTimeout(()=>el.classList.remove("show"),2200);
-}
+const PROMO_CODES={}; // Добавляйте реальные промокоды сюда, когда появятся.
+let cart=JSON.parse(localStorage.getItem("vikdem_cart")||"[]");
+let favorites=JSON.parse(localStorage.getItem("vikdem_favorites")||"[]");
+let recent=JSON.parse(localStorage.getItem("vikdem_recent")||"[]");
+let currentFilter="all",currentSearch="",selectedProduct=null,discount=0,promoCode="",giftWrap=false;
+const $=id=>document.getElementById(id);
+const money=n=>Number(n).toLocaleString("ru-RU")+" ₽";
+function haptic(){try{if(tg&&tg.HapticFeedback)tg.HapticFeedback.impactOccurred("light")}catch(e){}}
+function toast(text){const el=$("toast");el.textContent=text;el.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>el.classList.remove("show"),2200)}
 function saveCart(){localStorage.setItem("vikdem_cart",JSON.stringify(cart))}
 function saveFav(){localStorage.setItem("vikdem_favorites",JSON.stringify(favorites))}
-function updateCount(){
-  const n=cart.reduce((s,x)=>s+x.quantity,0);
-  $("cartCount").textContent=n; $("floatingCount").textContent=n;
-  $("floatingCount").style.display=n?"grid":"none";
-}
-function addToCart(p){
-  const item=cart.find(x=>x.id===p.id);
-  if(item)item.quantity++;
-  else cart.push({id:p.id,name:p.name,price:p.price,quantity:1});
-  saveCart();updateCount();toast(p.name+" добавлены в корзину");haptic();
-}
-function changeQty(id,delta){
-  const item=cart.find(x=>x.id===id); if(!item)return;
-  item.quantity+=delta;
-  if(item.quantity<=0)cart=cart.filter(x=>x.id!==id);
-  saveCart();updateCount();renderCart();
-}
-function removeItem(id){
-  cart=cart.filter(x=>x.id!==id);saveCart();updateCount();renderCart();
-}
-function cartTotal(){return cart.reduce((s,x)=>s+x.price*x.quantity,0)}
+function saveRecent(){localStorage.setItem("vikdem_recent",JSON.stringify(recent))}
+function updateCount(){const n=cart.reduce((s,x)=>s+x.quantity,0);$("cartCount").textContent=n;$("floatingCount").textContent=n;$("floatingCount").style.display=n?"grid":"none"}
+function addRecent(id){recent=[id,...recent.filter(x=>x!==id)].slice(0,6);saveRecent();renderRecent()}
+function addToCart(p){if(!p)return;const item=cart.find(x=>x.id===p.id);if(item)item.quantity++;else cart.push({id:p.id,name:p.name,price:p.price,quantity:1});saveCart();updateCount();toast(p.name+" добавлены в корзину");haptic()}
+function buyNow(p){addToCart(p);openCart()}
+function changeQty(id,delta){const item=cart.find(x=>x.id===id);if(!item)return;item.quantity+=delta;if(item.quantity<=0)cart=cart.filter(x=>x.id!==id);saveCart();updateCount();renderCart()}
+function removeItem(id){cart=cart.filter(x=>x.id!==id);saveCart();updateCount();renderCart()}
+function cartSubtotal(){return cart.reduce((s,x)=>s+x.price*x.quantity,0)}
+function cartTotal(){return Math.max(0,cartSubtotal()-discount+(giftWrap&&cart.length?300:0))}
 function renderCart(){
-  const box=$("cartItems");
-  if(!cart.length){
-    box.innerHTML='<div class="empty">Корзина пока пуста.<br>Выберите модель из каталога.</div>';
-    $("cartTotal").textContent="0 ₽";return;
-  }
-  box.innerHTML=cart.map(x=>`
-    <div class="cart-row">
-      <div><b>${x.name}</b><div style="color:#777;font:9px Arial;margin-top:4px">${money(x.price)} / шт.</div></div>
-      <div class="qty">
-        <button data-minus="${x.id}">−</button><span>${x.quantity}</span><button data-plus="${x.id}">+</button>
-        <button class="remove" data-remove="${x.id}">×</button>
-      </div>
-    </div>`).join("");
-  $("cartTotal").textContent=money(cartTotal());
-  box.querySelectorAll("[data-minus]").forEach(b=>b.onclick=()=>changeQty(Number(b.dataset.minus),-1));
-  box.querySelectorAll("[data-plus]").forEach(b=>b.onclick=()=>changeQty(Number(b.dataset.plus),1));
-  box.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>removeItem(Number(b.dataset.remove)));
+ const box=$("cartItems");
+ if(!cart.length){box.innerHTML='<div class="empty">Корзина пока пуста.<br>Выберите модель из каталога.</div>';$('cartTotal').textContent="0 ₽";return}
+ box.innerHTML=cart.map(x=>`<div class="cart-row"><div><b>${x.name}</b><div style="color:#777;font:9px Arial;margin-top:4px">${money(x.price)} / шт.</div></div><div class="qty"><button data-minus="${x.id}">−</button><span>${x.quantity}</span><button data-plus="${x.id}">+</button><button class="remove" data-remove="${x.id}">×</button></div></div>`).join("");
+ let html=`<div class="discount-line"><span>Товары</span><strong>${money(cartSubtotal())}</strong></div>`;
+ if(discount)html+=`<div class="discount-line"><span>Скидка</span><strong>−${money(discount)}</strong></div>`;
+ if(giftWrap)html+=`<div class="discount-line"><span>Подарочная упаковка</span><strong>+300 ₽</strong></div>`;
+ box.insertAdjacentHTML("beforeend",html);$("cartTotal").textContent=money(cartTotal());
+ box.querySelectorAll("[data-minus]").forEach(b=>b.onclick=()=>changeQty(Number(b.dataset.minus),-1));box.querySelectorAll("[data-plus]").forEach(b=>b.onclick=()=>changeQty(Number(b.dataset.plus),1));box.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>removeItem(Number(b.dataset.remove)));
 }
-function isVisible(p){
-  const filterOk=currentFilter==="all"||p.category===currentFilter;
-  const q=currentSearch.toLowerCase();
-  const searchOk=!q||p.name.toLowerCase().includes(q)||p.description.toLowerCase().includes(q);
-  return filterOk&&searchOk;
-}
-function renderProducts(){
-  let list=products.filter(isVisible);
-  const sort=$("sort").value;
-  if(sort==="priceAsc")list.sort((a,b)=>a.price-b.price);
-  if(sort==="priceDesc")list.sort((a,b)=>b.price-a.price);
-  if(sort==="name")list.sort((a,b)=>a.name.localeCompare(b.name,"ru"));
-  $("resultsCount").textContent="Показано моделей: "+list.length;
-  $("noResults").style.display=list.length?"none":"block";
-  $("products").innerHTML=list.map(p=>{
-    const fav=favorites.includes(p.id);
-    const gender=p.category==="women"?"ЖЕНСКИЕ":"МУЖСКИЕ";
-    return `
-      <article class="product" data-id="${p.id}">
-        <div class="visual">
-          <button class="fav ${fav?"active":""}" data-fav="${p.id}">${fav?"♥":"♡"}</button>
-          <div class="watch">⌚</div>
-          <div class="label">VIKDEM • POEDAGAR</div>
-        </div>
-        <div class="product-body">
-          <div class="product-name">${p.name}</div>
-          <div class="product-meta">${gender} • В НАЛИЧИИ</div>
-          <div class="product-desc">${p.description}</div>
-          <div class="product-bottom"><div class="price">${money(p.price)}</div><button class="add" data-add="${p.id}">В КОРЗИНУ</button></div>
-          <button class="details" data-details="${p.id}">ПОДРОБНЕЕ</button>
-        </div>
-      </article>`;
-  }).join("");
-  $("products").querySelectorAll("[data-add]").forEach(b=>b.onclick=e=>{
-    e.stopPropagation();const p=products.find(x=>x.id===Number(b.dataset.add));addToCart(p);
-  });
-  $("products").querySelectorAll("[data-fav]").forEach(b=>b.onclick=e=>{
-    e.stopPropagation();toggleFav(Number(b.dataset.fav));
-  });
-  $("products").querySelectorAll("[data-details]").forEach(b=>b.onclick=e=>{
-    e.stopPropagation();openProduct(Number(b.dataset.details));
-  });
-}
-function toggleFav(id){
-  favorites.includes(id)?favorites=favorites.filter(x=>x!==id):favorites.push(id);
-  saveFav();renderProducts();haptic();
-  toast(favorites.includes(id)?"Добавлено в избранное":"Удалено из избранного");
-}
-function openProduct(id){
-  selectedProduct=products.find(x=>x.id===id);if(!selectedProduct)return;
-  $("modalTitle").textContent=selectedProduct.name;
-  $("modalDesc").textContent=selectedProduct.description+". Фотографии и расширенные характеристики будут добавлены позже.";
-  $("modalPrice").textContent=money(selectedProduct.price);
-  openOverlay("productOverlay");haptic();
-}
-function openOverlay(id){$(id).classList.add("active")}
-function closeOverlay(id){$(id).classList.remove("active")}
-
-document.querySelectorAll(".filter").forEach(b=>b.onclick=()=>{
-  document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));
-  b.classList.add("active");currentFilter=b.dataset.filter;renderProducts();haptic();
-});
-$("search").addEventListener("input",e=>{currentSearch=e.target.value.trim();renderProducts()});
-$("sort").addEventListener("change",renderProducts);
-
+function isVisible(p){const filterOk=currentFilter==="all"||p.category===currentFilter;const q=currentSearch.toLowerCase();const searchOk=!q||[p.name,p.description,p.style,p.category].join(" ").toLowerCase().includes(q);return filterOk&&searchOk}
+function productCard(p){const fav=favorites.includes(p.id);const gender=p.category==="women"?"ЖЕНСКИЕ":"МУЖСКИЕ";return `<article class="product" data-id="${p.id}"><div class="visual"><div class="badges"><span class="badge-tag">${p.badge}</span><span class="badge-tag">В НАЛИЧИИ</span></div><button class="fav ${fav?"active":""}" data-fav="${p.id}">${fav?"♥":"♡"}</button><div class="watch">⌚</div><div class="label">VIKDEM • POEDAGAR</div></div><div class="product-body"><div class="product-name">${p.name}</div><div class="product-meta">${gender} • ${p.style.toUpperCase()}</div><div class="product-desc">${p.description}</div><div class="product-bottom"><div class="price">${money(p.price)}</div><button class="add" data-add="${p.id}">В КОРЗИНУ</button></div><div class="buy-row"><button class="buy-now" data-buy="${p.id}">КУПИТЬ СЕЙЧАС</button><button class="buy-now" data-details="${p.id}">ПОДРОБНЕЕ</button></div></div></article>`}
+function bindProductEvents(root=$("products")){root.querySelectorAll("[data-add]").forEach(b=>b.onclick=e=>{e.stopPropagation();addToCart(products.find(x=>x.id===Number(b.dataset.add)))});root.querySelectorAll("[data-buy]").forEach(b=>b.onclick=e=>{e.stopPropagation();buyNow(products.find(x=>x.id===Number(b.dataset.buy)))});root.querySelectorAll("[data-fav]").forEach(b=>b.onclick=e=>{e.stopPropagation();toggleFav(Number(b.dataset.fav))});root.querySelectorAll("[data-details]").forEach(b=>b.onclick=e=>{e.stopPropagation();openProduct(Number(b.dataset.details))})}
+function renderProducts(){let list=products.filter(isVisible);const sort=$("sort").value;if(sort==="priceAsc")list.sort((a,b)=>a.price-b.price);if(sort==="priceDesc")list.sort((a,b)=>b.price-a.price);if(sort==="name")list.sort((a,b)=>a.name.localeCompare(b.name,"ru"));$("resultsCount").textContent="Показано моделей: "+list.length;$("noResults").style.display=list.length?"none":"block";$("products").innerHTML=list.map(productCard).join("");bindProductEvents()}
+function toggleFav(id){favorites.includes(id)?favorites=favorites.filter(x=>x!==id):favorites.push(id);saveFav();renderProducts();haptic();toast(favorites.includes(id)?"Добавлено в избранное":"Удалено из избранного")}
+function openProduct(id){selectedProduct=products.find(x=>x.id===id);if(!selectedProduct)return;addRecent(id);$("modalTitle").textContent=selectedProduct.name;$("modalDesc").innerHTML=`${selectedProduct.description}.<div class="specs"><div class="spec"><span>Бренд</span><b>POEDAGAR</b></div><div class="spec"><span>Категория</span><b>${selectedProduct.category==="women"?"Женские":"Мужские"}</b></div><div class="spec"><span>Цена</span><b>${money(selectedProduct.price)}</b></div><div class="spec"><span>Фото</span><b>Будут добавлены</b></div></div>`;$("modalPrice").textContent=money(selectedProduct.price);openOverlay("productOverlay");haptic()}
+function openOverlay(id){$(id).classList.add("active");document.body.classList.add("modal-open")}
+function closeOverlay(id){$(id).classList.remove("active");if(!document.querySelector(".overlay.active"))document.body.classList.remove("modal-open")}
 function openCart(){renderCart();openOverlay("cartOverlay");haptic()}
-$("cartBtn").onclick=openCart;
-$("floatingCart").onclick=openCart;
-$("goCatalog").onclick=()=>{ $("catalog").scrollIntoView({behavior:"smooth"});haptic() };
+function renderFavorites(){const list=products.filter(p=>favorites.includes(p.id));$("resultsCount").textContent="Избранных моделей: "+list.length;$("noResults").style.display=list.length?"none":"block";$("products").innerHTML=list.map(productCard).join("");bindProductEvents();$("catalog").scrollIntoView({behavior:"smooth"})}
+function miniCard(p){return `<div class="mini-product" data-mini="${p.id}"><div class="mini-watch">⌚</div><b>${p.name}</b><span>${money(p.price)}</span></div>`}
+function renderRecent(){const sec=$("recentSection"),grid=$("recentGrid");if(!sec||!grid)return;const list=recent.map(id=>products.find(p=>p.id===id)).filter(Boolean);sec.style.display=list.length?"block":"none";grid.innerHTML=list.map(miniCard).join("");grid.querySelectorAll("[data-mini]").forEach(x=>x.onclick=()=>openProduct(Number(x.dataset.mini)))}
+function renderRecommendations(){const grid=$("recommendGrid");if(!grid)return;let base=selectedProduct?selectedProduct.category:"men";let list=products.filter(p=>p.category===base&&!recent.includes(p.id)).slice(0,3);if(list.length<3)list=products.filter(p=>!recent.includes(p.id)).slice(0,3);grid.innerHTML=list.map(miniCard).join("");grid.querySelectorAll("[data-mini]").forEach(x=>x.onclick=()=>openProduct(Number(x.dataset.mini)))}
+function applyStyle(){const g=$("styleGender").value,b=Number($("styleBudget").value)||Infinity,s=$("styleSort").value;currentFilter=g;currentSearch="";$("search").value="";document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter===g));let list=products.filter(p=>(g==="all"||p.category===g)&&p.price<=b);if(s==="priceAsc")list.sort((a,b)=>a.price-b.price);if(s==="priceDesc")list.sort((a,b)=>b.price-a.price);$("resultsCount").textContent="Подобрано моделей: "+list.length;$("noResults").style.display=list.length?"none":"block";$("products").innerHTML=list.map(productCard).join("");bindProductEvents();$("catalog").scrollIntoView({behavior:"smooth"});haptic()}
+function renderOrderSummary(){let html=cart.map(x=>`<div class="order-row"><b>${x.name} × ${x.quantity}</b><span style="color:#ddd;font:10px Arial">${money(x.price*x.quantity)}</span></div>`).join("");html+=`<div class="discount-line"><span>Товары</span><strong>${money(cartSubtotal())}</strong></div>`;if(discount)html+=`<div class="discount-line"><span>Скидка</span><strong>−${money(discount)}</strong></div>`;if(giftWrap)html+=`<div class="discount-line"><span>Подарочная упаковка</span><strong>+300 ₽</strong></div>`;html+=`<div class="total"><span>ИТОГО</span><strong>${money(cartTotal())}</strong></div>`;$("orderSummary").innerHTML=html}
+function applyPromo(){const code=$("promoCode").value.trim().toUpperCase();const cfg=PROMO_CODES[code];if(!code){discount=0;promoCode="";$("promoMessage").textContent="";renderCart();return}if(!cfg){discount=0;promoCode="";$("promoMessage").textContent="Промокод не найден.";return}discount=Math.min(cartSubtotal(),Math.round(cartSubtotal()*cfg.percent/100));promoCode=code;$("promoMessage").textContent=`Промокод применён: −${cfg.percent}%`;renderCart();haptic()}
 
-$("favoritesBtn").onclick=()=>{
-  if(!favorites.length){toast("Избранное пока пусто");return}
-  currentSearch="";
-  $("search").value="";
-  document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));
-  document.querySelector('.filter[data-filter="all"]').classList.add("active");
-  $("products").innerHTML=products.filter(p=>favorites.includes(p.id)).map(p=>{
-    const gender=p.category==="women"?"ЖЕНСКИЕ":"МУЖСКИЕ";
-    return `<article class="product"><div class="visual"><button class="fav active" data-fav="${p.id}">♥</button><div class="watch">⌚</div><div class="label">VIKDEM • POEDAGAR</div></div><div class="product-body"><div class="product-name">${p.name}</div><div class="product-meta">${gender}</div><div class="product-desc">${p.description}</div><div class="product-bottom"><div class="price">${money(p.price)}</div><button class="add" data-add="${p.id}">В КОРЗИНУ</button></div><button class="details" data-details="${p.id}">ПОДРОБНЕЕ</button></div></article>`;
-  }).join("");
-  $("resultsCount").textContent="Избранных моделей: "+favorites.length;
-  $("noResults").style.display="none";
-  $("products").querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>addToCart(products.find(x=>x.id===Number(b.dataset.add))));
-  $("products").querySelectorAll("[data-fav]").forEach(b=>b.onclick=()=>toggleFav(Number(b.dataset.fav)));
-  $("products").querySelectorAll("[data-details]").forEach(b=>b.onclick=()=>openProduct(Number(b.dataset.details)));
-  $("catalog").scrollIntoView({behavior:"smooth"});haptic();
-};
-
+document.querySelectorAll(".filter").forEach(b=>b.onclick=()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");currentFilter=b.dataset.filter;renderProducts();haptic()});
+$("search").addEventListener("input",e=>{currentSearch=e.target.value.trim();renderProducts()});$("sort").addEventListener("change",renderProducts);$("cartBtn").onclick=openCart;$("floatingCart").onclick=openCart;$("goCatalog").onclick=()=>{$("catalog").scrollIntoView({behavior:"smooth"});haptic()};$("goFavorites").onclick=()=>{$("favoritesBtn").click()};
+$("favoritesBtn").onclick=()=>{if(!favorites.length){toast("Избранное пока пусто");return}currentFilter="all";currentSearch="";$("search").value="";document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));renderFavorites();haptic()};
 $("modalAdd").onclick=()=>{if(selectedProduct){addToCart(selectedProduct);closeOverlay("productOverlay")}};
-$("checkout").onclick=()=>{
-  if(!cart.length){toast("Корзина пуста");return}
-  renderOrderSummary();closeOverlay("cartOverlay");openOverlay("checkoutOverlay");haptic();
-};
-function renderOrderSummary(){
-  $("orderSummary").innerHTML=cart.map(x=>`<div class="order-row"><b>${x.name} × ${x.quantity}</b><span style="color:#ddd;font:10px Arial">${money(x.price*x.quantity)}</span></div>`).join("")+
-    `<div class="total"><span>ИТОГО</span><strong>${money(cartTotal())}</strong></div>`;
-}
-
-document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeOverlay(b.dataset.close));
-document.querySelectorAll(".overlay").forEach(o=>o.onclick=e=>{if(e.target===o)o.classList.remove("active")});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".overlay.active").forEach(x=>x.classList.remove("active"))});
-
-$("back").onclick=()=>{
-  closeOverlay("checkoutOverlay");
-  $("checkoutForm").style.display="block";
-  $("success").style.display="none";
-};
-
+$("checkout").onclick=()=>{if(!cart.length){toast("Корзина пуста");return}giftWrap=$("giftWrap")?$("giftWrap").checked:false;renderOrderSummary();closeOverlay("cartOverlay");openOverlay("checkoutOverlay");haptic()};
+if($("giftWrap"))$("giftWrap").addEventListener("change",()=>{giftWrap=$("giftWrap").checked;renderCart();renderOrderSummary()});if($("applyPromo"))$("applyPromo").onclick=applyPromo;
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeOverlay(b.dataset.close));document.querySelectorAll(".overlay").forEach(o=>o.onclick=e=>{if(e.target===o)closeOverlay(o.id)});document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".overlay.active").forEach(x=>closeOverlay(x.id))});
+$("back").onclick=()=>{closeOverlay("checkoutOverlay");$("checkoutForm").style.display="block";$("success").style.display="none"};
+$("applyStyle").onclick=applyStyle;
+$("shareShop").onclick=async()=>{try{if(navigator.share)await navigator.share({title:"VIKDEM",text:"VIKDEM — часы",url:location.href});else{await navigator.clipboard.writeText(location.href);toast("Ссылка скопирована")}}catch(e){}};
 $("submitOrder").onclick=async()=>{
-  const name=$("customerName").value.trim();
-  const phone=$("customerPhone").value.trim();
-  const city=$("customerCity").value.trim();
-  const delivery=$("deliveryType").value;
-  const comment=$("customerComment").value.trim();
-
-  if(!name)return toast("Введите ваше имя");
-  if(!phone)return toast("Введите номер телефона");
-  if(!city)return toast("Введите город");
-  if(!cart.length)return toast("Корзина пуста");
-
-  const total=cartTotal();
-  const items=cart.map(x=>`${x.name} × ${x.quantity} — ${money(x.price*x.quantity)}`).join("\n");
-  const btn=$("submitOrder");btn.disabled=true;btn.textContent="ОТПРАВЛЯЕМ...";
-
-  try{
-    const response=await fetch(WORKER_URL,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        name,phone,city,delivery,comment,
-        items,total:total.toLocaleString("ru-RU")
-      })
-    });
-    if(!response.ok)throw new Error("HTTP "+response.status);
-
-    cart=[];saveCart();updateCount();renderCart();
-    $("checkoutForm").style.display="none";
-    $("success").style.display="block";
-    haptic();
-  }catch(err){
-    console.error(err);
-    toast("Не удалось отправить заказ. Проверьте соединение.");
-  }finally{
-    btn.disabled=false;btn.textContent="ПОДТВЕРДИТЬ ЗАКАЗ";
-  }
+ const name=$("customerName").value.trim(),phone=$("customerPhone").value.trim(),city=$("customerCity").value.trim(),delivery=$("deliveryType").value,comment=$("customerComment").value.trim();giftWrap=$("giftWrap")?$("giftWrap").checked:false;
+ if(!name)return toast("Введите ваше имя");if(!phone)return toast("Введите номер телефона");if(!city)return toast("Введите город");if(!cart.length)return toast("Корзина пуста");
+ const total=cartTotal();const items=cart.map(x=>`${x.name} × ${x.quantity} — ${money(x.price*x.quantity)}`).join("\n")+(giftWrap?"\nПодарочная упаковка — 300 ₽":"")+(promoCode?`\nПромокод: ${promoCode} — скидка ${money(discount)}`:"");const btn=$("submitOrder");btn.disabled=true;btn.textContent="ОТПРАВЛЯЕМ...";
+ try{const response=await fetch(WORKER_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,phone,city,delivery,comment,items,total:total.toLocaleString("ru-RU")})});if(!response.ok)throw new Error("HTTP "+response.status);cart=[];discount=0;promoCode="";giftWrap=false;saveCart();updateCount();renderCart();$("checkoutForm").style.display="none";$("success").style.display="block";haptic()}catch(err){console.error(err);toast("Не удалось отправить заказ. Проверьте соединение.")}finally{btn.disabled=false;btn.textContent="ПОДТВЕРДИТЬ ЗАКАЗ"}
 };
-
-renderProducts();renderCart();updateCount();
+renderProducts();renderCart();updateCount();renderRecent();renderRecommendations();
 </script>
 </body>
 </html>
