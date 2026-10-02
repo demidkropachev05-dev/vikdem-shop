@@ -608,5 +608,245 @@ $("submitOrder").onclick=async()=>{
 };
 renderProducts();renderCart();updateCount();renderRecent();renderRecommendations();
 </script>
+
+<style id="vikdem-max-admin-css">
+#adminFab{position:fixed;right:14px;bottom:88px;z-index:9990;width:46px;height:46px;border:1px solid rgba(224,182,83,.45);border-radius:50%;background:rgba(5,5,5,.88);color:#e0b653;font-size:20px;box-shadow:0 8px 30px #000;display:none}
+#adminOverlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);display:none;overflow:auto;padding:14px}
+#adminPanel{max-width:1100px;margin:0 auto;background:#090909;border:1px solid rgba(224,182,83,.28);border-radius:22px;box-shadow:0 20px 80px #000;overflow:hidden}
+.adminHead{position:sticky;top:0;z-index:2;padding:16px;background:linear-gradient(135deg,#17120a,#090909);border-bottom:1px solid rgba(224,182,83,.2);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.adminTitle{font:700 20px Arial;color:#f6d982}.adminSub{font:11px Arial;color:#888;margin-top:3px}
+.adminClose{border:1px solid #555;background:#111;color:#fff;border-radius:12px;padding:10px 13px}
+.adminTabs{display:flex;gap:7px;overflow:auto;padding:10px;border-bottom:1px solid #222}
+.adminTab{white-space:nowrap;border:1px solid #292929;background:#111;color:#aaa;border-radius:12px;padding:10px 13px}.adminTab.active{color:#f6d982;border-color:#9b772e;background:#1a150c}
+.adminBody{padding:14px}.adminSection{display:none}.adminSection.active{display:block}
+.adminGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.adminCard{background:#101010;border:1px solid #242424;border-radius:16px;padding:14px}
+.adminCard h3{margin:0 0 10px;font:700 15px Arial;color:#eee}.adminCard p{font:12px Arial;color:#888;line-height:1.5}
+.adminInput,.adminSelect,.adminTextarea{width:100%;border:1px solid #333;background:#080808;color:#eee;border-radius:11px;padding:11px;margin:5px 0 9px;outline:none}
+.adminTextarea{min-height:100px;resize:vertical}
+.adminBtn{border:1px solid #8e6b29;background:#171208;color:#f6d982;border-radius:11px;padding:10px 13px;margin:3px;cursor:pointer}.adminBtn.danger{border-color:#733434;color:#ff9a9a}.adminBtn.ok{border-color:#42734a;color:#a9e6b1}
+.adminStats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.adminStat{background:#101010;border:1px solid #242424;border-radius:14px;padding:12px}.adminStat b{display:block;font:700 21px Arial;color:#f6d982}.adminStat span{font:10px Arial;color:#888}
+.adminList{display:grid;gap:8px}.adminRow{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#0d0d0d;border:1px solid #242424;border-radius:13px;padding:10px}.adminRowMain{min-width:0}.adminRowMain b{display:block;font:700 13px Arial;color:#eee}.adminRowMain small{font:10px Arial;color:#777}.adminActions{display:flex;flex-wrap:wrap;justify-content:flex-end}
+.adminLogin{max-width:390px;margin:12vh auto;background:#0c0c0c;border:1px solid #292929;border-radius:20px;padding:22px}
+.adminNote{font:11px Arial;color:#777;line-height:1.5;background:#0b0b0b;border:1px dashed #333;border-radius:12px;padding:10px;margin:8px 0}
+@media(max-width:650px){.adminGrid{grid-template-columns:1fr}.adminStats{grid-template-columns:repeat(2,1fr)}#adminOverlay{padding:7px}.adminHead{padding:12px}}
+</style>
+
+<button id="adminFab" aria-label="Админ">⚙️</button>
+<div id="adminOverlay">
+  <div id="adminLogin" class="adminLogin">
+    <div class="adminTitle">VIKDEM ADMIN</div>
+    <div class="adminSub">Управление магазином</div>
+    <input id="adminPass" class="adminInput" type="password" placeholder="Пароль администратора">
+    <button id="adminLoginBtn" class="adminBtn ok" style="width:100%">ВОЙТИ</button>
+    <div class="adminNote">Это одnofile-версия: данные админки сохраняются в localStorage этого браузера. Для настоящей серверной авторизации и общей базы между устройствами нужен backend.</div>
+    <button id="adminLoginClose" class="adminBtn" style="width:100%">ЗАКРЫТЬ</button>
+  </div>
+  <div id="adminPanel">
+    <div class="adminHead">
+      <div><div class="adminTitle">VIKDEM ADMIN</div><div class="adminSub">Каталог · заказы · промокоды · настройки</div></div>
+      <button id="adminClose" class="adminClose">✕</button>
+    </div>
+    <div class="adminTabs">
+      <button class="adminTab active" data-at="dashboard">Обзор</button>
+      <button class="adminTab" data-at="products">Товары</button>
+      <button class="adminTab" data-at="orders">Заказы</button>
+      <button class="adminTab" data-at="promos">Промокоды</button>
+      <button class="adminTab" data-at="content">Контент</button>
+      <button class="adminTab" data-at="settings">Настройки</button>
+      <button class="adminTab" data-at="backup">Резерв</button>
+    </div>
+    <div class="adminBody">
+      <section id="at-dashboard" class="adminSection active">
+        <div class="adminStats">
+          <div class="adminStat"><b id="aStatProducts">0</b><span>ТОВАРОВ</span></div>
+          <div class="adminStat"><b id="aStatOrders">0</b><span>ЗАКАЗОВ</span></div>
+          <div class="adminStat"><b id="aStatFav">0</b><span>ИЗБРАННЫХ</span></div>
+          <div class="adminStat"><b id="aStatViews">0</b><span>ПРОСМОТРОВ</span></div>
+        </div>
+        <div class="adminGrid">
+          <div class="adminCard"><h3>Быстрые действия</h3><button class="adminBtn" data-jump="products">+ Добавить товар</button><button class="adminBtn" data-jump="orders">Заказы</button><button class="adminBtn" data-jump="promos">Промокоды</button></div>
+          <div class="adminCard"><h3>Состояние</h3><p id="aHealth">Проверка...</p></div>
+        </div>
+      </section>
+
+      <section id="at-products" class="adminSection">
+        <div class="adminGrid">
+          <div class="adminCard">
+            <h3>Добавить / изменить товар</h3>
+            <input id="pId" class="adminInput" placeholder="ID модели, например 999">
+            <input id="pName" class="adminInput" placeholder="Название">
+            <input id="pPrice" class="adminInput" type="number" placeholder="Цена ₽">
+            <select id="pGender" class="adminSelect"><option value="men">Мужские</option><option value="women">Женские</option></select>
+            <input id="pBadge" class="adminInput" placeholder="Бейдж: Новинка / Хит / Выгодная цена">
+            <input id="pStyle" class="adminInput" placeholder="Стиль">
+            <input id="pImage" class="adminInput" placeholder="URL фото">
+            <textarea id="pDesc" class="adminTextarea" placeholder="Описание"></textarea>
+            <input id="pSpecs" class="adminInput" placeholder="Характеристики через |">
+            <button id="saveProductAdmin" class="adminBtn ok">СОХРАНИТЬ ТОВАР</button>
+            <button id="clearProductAdmin" class="adminBtn">ОЧИСТИТЬ</button>
+          </div>
+          <div class="adminCard"><h3>Каталог</h3><div id="adminProductsList" class="adminList"></div></div>
+        </div>
+      </section>
+
+      <section id="at-orders" class="adminSection">
+        <div class="adminCard"><h3>Локальная история заказов</h3><p>Заказы, отправленные через эту страницу, дополнительно сохраняются на этом устройстве.</p><div id="adminOrdersList" class="adminList"></div></div>
+      </section>
+
+      <section id="at-promos" class="adminSection">
+        <div class="adminGrid">
+          <div class="adminCard">
+            <h3>Промокод</h3>
+            <input id="promoName" class="adminInput" placeholder="Код, например VIKDEM10">
+            <input id="promoPercent" class="adminInput" type="number" min="0" max="100" placeholder="Скидка %">
+            <button id="savePromoAdmin" class="adminBtn ok">СОХРАНИТЬ</button>
+          </div>
+          <div class="adminCard"><h3>Активные коды</h3><div id="adminPromosList" class="adminList"></div></div>
+        </div>
+      </section>
+
+      <section id="at-content" class="adminSection">
+        <div class="adminGrid">
+          <div class="adminCard">
+            <h3>Тексты магазина</h3>
+            <input id="setHero" class="adminInput" placeholder="Заголовок">
+            <input id="setSub" class="adminInput" placeholder="Подзаголовок">
+            <textarea id="setAnnouncement" class="adminTextarea" placeholder="Анонс / акция"></textarea>
+            <button id="saveContentAdmin" class="adminBtn ok">СОХРАНИТЬ ТЕКСТЫ</button>
+          </div>
+          <div class="adminCard">
+            <h3>Отзывы</h3>
+            <input id="reviewName" class="adminInput" placeholder="Имя">
+            <input id="reviewText" class="adminInput" placeholder="Текст отзыва">
+            <button id="saveReviewAdmin" class="adminBtn ok">ДОБАВИТЬ ОТЗЫВ</button>
+            <div id="adminReviewsList" class="adminList"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="at-settings" class="adminSection">
+        <div class="adminGrid">
+          <div class="adminCard">
+            <h3>Настройки магазина</h3>
+            <input id="setContact" class="adminInput" placeholder="@Telegram">
+            <input id="setDelivery" class="adminInput" placeholder="Условия доставки">
+            <input id="setAdminPass" class="adminInput" type="password" placeholder="Новый пароль администратора">
+            <button id="saveSettingsAdmin" class="adminBtn ok">СОХРАНИТЬ</button>
+          </div>
+          <div class="adminCard"><h3>Системная информация</h3><p>Worker заказов: vikdem-telegram.demidkropache05.workers.dev</p><p>Хранилище: localStorage</p><p>Режим: one-file mobile shop</p></div>
+        </div>
+      </section>
+
+      <section id="at-backup" class="adminSection">
+        <div class="adminCard">
+          <h3>Резервная копия</h3>
+          <p>Экспортирует товары, промокоды, заказы, отзывы и настройки в JSON. Файл можно сохранить на iPhone и импортировать обратно.</p>
+          <button id="exportAdmin" class="adminBtn ok">ЭКСПОРТ JSON</button>
+          <input id="importAdminFile" class="adminInput" type="file" accept="application/json">
+          <button id="resetAdmin" class="adminBtn danger">СБРОСИТЬ ЛОКАЛЬНЫЕ ИЗМЕНЕНИЯ</button>
+          <div class="adminNote">Сброс не удаляет данные GitHub-кода, только настройки, сохранённые этой админкой.</div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script id="vikdem-max-admin-js">
+(()=>{
+const KEY="vikdem_max_admin_v1";
+const DEFAULT_PASS="1234";
+const $a=id=>document.getElementById(id);
+let adminData=JSON.parse(localStorage.getItem(KEY)||"null")||{
+ pass:DEFAULT_PASS,
+ products:[],
+ promos:{},
+ orders:[],
+ reviews:[],
+ settings:{contact:"@RodKinWarrior",delivery:"Бесплатная доставка в Анапе · доставка в день заказа"},
+ content:{hero:"VIKDEM",sub:"ВЫГЛЯДЯТ ДОРОЖЕ, ЧЕМ СТОЯТ",announcement:"Новые поставки и специальные предложения — скоро."},
+ views:0
+};
+function saveAdmin(){localStorage.setItem(KEY,JSON.stringify(adminData))}
+function mergedProducts(){
+ let base=Array.isArray(window.PRODUCTS)?window.PRODUCTS.map(x=>({...x})):[];
+ const map=new Map(base.map(x=>[String(x.id),x]));
+ (adminData.products||[]).forEach(x=>map.set(String(x.id),x));
+ return [...map.values()];
+}
+function syncProducts(){
+ if(!window.PRODUCTS)return;
+ const mp=mergedProducts();
+ window.PRODUCTS.length=0; mp.forEach(x=>window.PRODUCTS.push(x));
+ if(typeof window.renderProducts==="function")window.renderProducts();
+ if(typeof window.renderCart==="function")window.renderCart();
+}
+function openAdmin(){ $a("adminOverlay").style.display="block"; $a("adminLogin").style.display="block"; $a("adminPanel").style.display="none"; $a("adminPass").value=""; }
+function enterAdmin(){ if($a("adminPass").value!==adminData.pass){alert("Неверный пароль");return} $a("adminLogin").style.display="none";$a("adminPanel").style.display="block";refreshAdmin(); }
+function closeAdmin(){ $a("adminOverlay").style.display="none"; }
+function tab(name){
+ document.querySelectorAll(".adminTab").forEach(x=>x.classList.toggle("active",x.dataset.at===name));
+ document.querySelectorAll(".adminSection").forEach(x=>x.classList.toggle("active",x.id==="at-"+name));
+ refreshAdmin();
+}
+function refreshAdmin(){
+ const ps=mergedProducts(); $a("aStatProducts").textContent=ps.length;
+ $a("aStatOrders").textContent=adminData.orders.length;
+ $a("aStatFav").textContent=(JSON.parse(localStorage.getItem("vikdem_favorites")||"[]")||[]).length;
+ $a("aStatViews").textContent=adminData.views;
+ $a("aHealth").textContent=`Каталог: ${ps.length} моделей · Worker: подключён в клиенте · локальная БД: OK`;
+ $a("adminProductsList").innerHTML=ps.map(p=>`<div class="adminRow"><div class="adminRowMain"><b>${p.name||"Модель "+p.id}</b><small>${p.gender==="women"?"Женские":"Мужские"} · ${Number(p.price||0).toLocaleString("ru-RU")} ₽</small></div><div class="adminActions"><button class="adminBtn" data-edit-product="${p.id}">Изменить</button><button class="adminBtn danger" data-del-product="${p.id}">Удалить</button></div></div>`).join("")||"<p>Нет товаров</p>";
+ $a("adminPromosList").innerHTML=Object.entries(adminData.promos||{}).map(([k,v])=>`<div class="adminRow"><div class="adminRowMain"><b>${k}</b><small>Скидка ${v.percent}%</small></div><button class="adminBtn danger" data-del-promo="${k}">Удалить</button></div>`).join("")||"<p>Промокодов нет</p>";
+ $a("adminOrdersList").innerHTML=adminData.orders.map((o,i)=>`<div class="adminRow"><div class="adminRowMain"><b>${o.name} · ${o.total} ₽</b><small>${o.phone} · ${o.city} · ${o.date}</small></div><div class="adminActions"><button class="adminBtn" data-status="${i}">${o.status||"Новый"}</button><button class="adminBtn danger" data-del-order="${i}">Удалить</button></div></div>`).join("")||"<p>Заказов пока нет</p>";
+ $a("adminReviewsList").innerHTML=adminData.reviews.map((r,i)=>`<div class="adminRow"><div class="adminRowMain"><b>${r.name}</b><small>${r.text}</small></div><button class="adminBtn danger" data-del-review="${i}">Удалить</button></div>`).join("");
+ $a("setHero").value=adminData.content.hero;$a("setSub").value=adminData.content.sub;$a("setAnnouncement").value=adminData.content.announcement;
+ $a("setContact").value=adminData.settings.contact;$a("setDelivery").value=adminData.settings.delivery;
+}
+function editProduct(id){
+ const p=mergedProducts().find(x=>String(x.id)===String(id)); if(!p)return;
+ $a("pId").value=p.id;$a("pName").value=p.name||"";$a("pPrice").value=p.price||0;$a("pGender").value=p.gender||"men";$a("pBadge").value=p.badge||"";$a("pStyle").value=p.style||"";$a("pImage").value=p.image||"";$a("pDesc").value=p.desc||"";$a("pSpecs").value=Array.isArray(p.specs)?p.specs.join(" | "):(p.specs||"");
+}
+function saveProduct(){
+ const id=$a("pId").value.trim();if(!id)return alert("Введите ID");
+ const p={id:id,name:$a("pName").value.trim()||("VIKDEM "+id),price:Number($a("pPrice").value)||0,gender:$a("pGender").value,badge:$a("pBadge").value.trim(),style:$a("pStyle").value.trim(),image:$a("pImage").value.trim(),desc:$a("pDesc").value.trim(),specs:$a("pSpecs").value.split("|").map(x=>x.trim()).filter(Boolean)};
+ adminData.products=(adminData.products||[]).filter(x=>String(x.id)!==id);adminData.products.push(p);saveAdmin();syncProducts();refreshAdmin();alert("Товар сохранён");
+}
+function clearProduct(){["pId","pName","pPrice","pBadge","pStyle","pImage","pDesc","pSpecs"].forEach(id=>$a(id).value="")}
+document.addEventListener("click",e=>{
+ const t=e.target;
+ if(t.id==="adminFab")openAdmin(); if(t.id==="adminLoginBtn")enterAdmin();if(t.id==="adminLoginClose"||t.id==="adminClose")closeAdmin();
+ if(t.classList.contains("adminTab"))tab(t.dataset.at);
+ if(t.dataset.jump)tab(t.dataset.jump);
+ if(t.dataset.editProduct)editProduct(t.dataset.editProduct);
+ if(t.dataset.delProduct){if(confirm("Удалить товар?")){adminData.products=(adminData.products||[]).filter(x=>String(x.id)!==String(t.dataset.delProduct));saveAdmin();syncProducts();refreshAdmin()}}
+ if(t.dataset.delPromo){delete adminData.promos[t.dataset.delPromo];saveAdmin();refreshAdmin()}
+ if(t.dataset.delOrder){adminData.orders.splice(Number(t.dataset.delOrder),1);saveAdmin();refreshAdmin()}
+ if(t.dataset.status){const i=Number(t.dataset.status), states=["Новый","Подтверждён","Собран","Передан","Завершён","Отменён"];const cur=states.indexOf(adminData.orders[i].status);adminData.orders[i].status=states[(cur+1)%states.length];saveAdmin();refreshAdmin()}
+ if(t.dataset.delReview){adminData.reviews.splice(Number(t.dataset.delReview),1);saveAdmin();refreshAdmin()}
+});
+$a("saveProductAdmin").onclick=saveProduct;$a("clearProductAdmin").onclick=clearProduct;
+$a("savePromoAdmin").onclick=()=>{const k=$a("promoName").value.trim().toUpperCase(),v=Number($a("promoPercent").value);if(!k||v<1||v>100)return alert("Введите код и скидку 1–100%");adminData.promos[k]={percent:v};saveAdmin();if(window.PROMO_CODES)window.PROMO_CODES[k]={percent:v};refreshAdmin();alert("Промокод сохранён")};
+$a("saveContentAdmin").onclick=()=>{adminData.content.hero=$a("setHero").value;adminData.content.sub=$a("setSub").value;adminData.content.announcement=$a("setAnnouncement").value;saveAdmin();alert("Тексты сохранены")};
+$a("saveReviewAdmin").onclick=()=>{const n=$a("reviewName").value.trim(),t=$a("reviewText").value.trim();if(!n||!t)return alert("Заполните имя и отзыв");adminData.reviews.push({name:n,text:t});saveAdmin();$a("reviewName").value="";$a("reviewText").value="";refreshAdmin()};
+$a("saveSettingsAdmin").onclick=()=>{adminData.settings.contact=$a("setContact").value.trim();adminData.settings.delivery=$a("setDelivery").value.trim();if($a("setAdminPass").value.trim())adminData.pass=$a("setAdminPass").value.trim();saveAdmin();alert("Настройки сохранены")};
+$a("exportAdmin").onclick=()=>{const blob=new Blob([JSON.stringify(adminData,null,2)],{type:"application/json"}),u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="vikdem-backup.json";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
+$a("importAdminFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{adminData=JSON.parse(r.result);saveAdmin();syncProducts();refreshAdmin();alert("Резервная копия импортирована")}catch(_){alert("Неверный JSON")}};r.readAsText(f)};
+$a("resetAdmin").onclick=()=>{if(confirm("Сбросить все локальные настройки админки?")){localStorage.removeItem(KEY);location.reload()}};
+window.addEventListener("load",()=>{
+ $a("adminFab").style.display="block";
+ adminData.views++;
+ saveAdmin();
+ if(window.PROMO_CODES)Object.assign(window.PROMO_CODES,adminData.promos||{});
+ syncProducts();
+});
+})();
+</script>
+
+<script>
+(()=>{
+ const originalSetItem=localStorage.setItem.bind(localStorage);
+ window.addEventListener("vikdem-order-created",e=>{});
+})();
+</script>
 </body>
 </html>
